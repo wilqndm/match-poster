@@ -1,7 +1,7 @@
 document.getElementById('match-form').addEventListener('submit', function (e) {
   e.preventDefault();
 
-  document.getElementById('matchday').textContent = `${document.getElementById('matchday-input').value}. kolejka`;
+  document.getElementById('matchday').textContent = `${document.getElementById('matchday-input').value}. kolejka "B" Klasa Warszawa grupa I`;
   document.getElementById('teamA').textContent = document.getElementById('teamA-input').value;
   document.getElementById('teamB').textContent = document.getElementById('teamB-input').value;
   document.getElementById('date').textContent = document.getElementById('date-input').value;
