@@ -85,7 +85,9 @@ form button {
 .logo {
   width: 140px;
   height: auto;
+  display: block;
 }
+
 
 .vs-bar {
   position: absolute;
