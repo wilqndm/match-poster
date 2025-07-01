@@ -97,23 +97,32 @@ form button {
 
 .vs-bar {
   position: absolute;
-  bottom: 125px; /* 80px info-bar + 5px odstępu + 40px bottom */
+  bottom: 125px;
   left: 10px;
   right: 10px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
   font-size: 40px;
   font-weight: bold;
   background: rgba(0, 0, 0, 0.6);
-  padding: 20px 0;
+  padding: 20px;
   border-radius: 10px;
-}
-
-.team-name {
-  margin: 0 40px;
+  text-align: center;
 }
 
 .vs {
   color: #ffcc00;
+  min-width: 60px;
+}
+
+.team {
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .info-bar {
