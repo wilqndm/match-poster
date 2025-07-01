@@ -42,3 +42,27 @@ document.getElementById('download-btn').addEventListener('click', () => {
     link.click();
   });
 });
+async function removeBackground(file) {
+  const reader = new FileReader();
+  return new Promise((resolve, reject) => {
+    reader.onload = async function () {
+      const base64 = reader.result.split(',')[1];
+
+      const response = await fetch('/api/remove-bg', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageBase64: base64 })
+      });
+
+      if (!response.ok) {
+        reject('Błąd usuwania tła');
+      }
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      resolve(url);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
