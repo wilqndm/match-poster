@@ -1,5 +1,3 @@
-
-
 document.getElementById('match-form').addEventListener('submit', function (e) {
   e.preventDefault();
 
@@ -19,16 +17,14 @@ document.getElementById('match-form').addEventListener('submit', function (e) {
     readerA.readAsDataURL(logoAFile);
   }
 
-const logoBInput = document.getElementById('logoB-input');
-if (logoBInput.files && logoBInput.files[0]) {
-  const readerB = new FileReader();
-  readerB.onload = function (e) {
-    const logoB = document.getElementById('logoB');
-    if (logoB) logoB.src = e.target.result;
-  };
-  readerB.readAsDataURL(logoBInput.files[0]);
-}
-
+  const logoBFile = document.getElementById('logoB-input').files[0];
+  if (logoBFile) {
+    const readerB = new FileReader();
+    readerB.onload = function (e) {
+      document.getElementById('logoB').src = e.target.result;
+    };
+    readerB.readAsDataURL(logoBFile);
+  }
 });
 
 document.getElementById('download-btn').addEventListener('click', () => {
@@ -38,7 +34,7 @@ document.getElementById('download-btn').addEventListener('click', () => {
     useCORS: true,
     allowTaint: true,
     backgroundColor: null,
-    scale: 2 // lepsza jakość
+    scale: 2
   }).then(canvas => {
     const link = document.createElement('a');
     link.download = 'match-poster.png';
