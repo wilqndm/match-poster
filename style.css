@@ -91,6 +91,7 @@ form button {
   display: block;
   object-fit: contain;
   z-index: 1;
+  mix-blend-mode: multiply;
 }
 
 
