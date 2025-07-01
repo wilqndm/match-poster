@@ -66,16 +66,16 @@ form button {
 
 .matchday {
   position: absolute;
-  top: 60px;
-  left: 250px;
-  font-size: 32px;
+  top: 80px;
+  left: 270px;
+  font-size: 42px;
   font-weight: bold;
   color: #fff;
 }
 
 .logos {
   position: absolute;
-  top: 150px;
+  top: 170px;
   left: 0;
   right: 0;
   display: flex;
