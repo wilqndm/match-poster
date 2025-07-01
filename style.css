@@ -89,8 +89,9 @@ form button {
 
 .vs-bar {
   position: absolute;
-  top: 300px;
-  width: 100%;
+  bottom: 100px; /* 80px height info-bar + 5px odstęp + 15px margines */
+  left: 10px;
+  right: 10px;
   text-align: center;
   font-size: 40px;
   font-weight: bold;
@@ -98,6 +99,7 @@ form button {
   padding: 20px 0;
   border-radius: 10px;
 }
+
 
 .team-name {
   margin: 0 40px;
