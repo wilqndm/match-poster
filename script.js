@@ -2,7 +2,7 @@ document.getElementById('match-form').addEventListener('submit', function (e) {
   e.preventDefault();
 
   // Ustawianie tekstów
-  document.getElementById('matchday').textContent = `${document.getElementById('matchday-input').value}. kolejka B Klasa`;
+  document.getElementById('matchday').textContent = `${document.getElementById('matchday-input').value}. kolejka "B" Klasa`;
   document.getElementById('teamA').textContent = document.getElementById('teamA-input').value;
   document.getElementById('teamB').textContent = document.getElementById('teamB-input').value;
   document.getElementById('date').textContent = document.getElementById('date-input').value;
