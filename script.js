@@ -1,32 +1,42 @@
 document.getElementById('match-form').addEventListener('submit', function (e) {
   e.preventDefault();
 
-  document.getElementById('matchday').textContent = `${document.getElementById('matchday-input').value}. kolejka "B" Klasa`;
+  // Ustawianie tekstów
+  document.getElementById('matchday').textContent = `${document.getElementById('matchday-input').value}. kolejka B Klasa`;
   document.getElementById('teamA').textContent = document.getElementById('teamA-input').value;
   document.getElementById('teamB').textContent = document.getElementById('teamB-input').value;
   document.getElementById('date').textContent = document.getElementById('date-input').value;
   document.getElementById('time').textContent = document.getElementById('time-input').value;
   document.getElementById('location').textContent = document.getElementById('location-input').value;
 
+  // Logo A – usuwanie tła
   const logoAFile = document.getElementById('logoA-input').files[0];
   if (logoAFile) {
-    const readerA = new FileReader();
-    readerA.onload = function (e) {
-      document.getElementById('logoA').src = e.target.result;
-    };
-    readerA.readAsDataURL(logoAFile);
+    removeBackground(logoAFile)
+      .then(url => {
+        document.getElementById('logoA').src = url;
+      })
+      .catch(err => {
+        console.error('Błąd usuwania tła z logo A:', err);
+        alert('Nie udało się usunąć tła z logo A.');
+      });
   }
 
+  // Logo B – usuwanie tła
   const logoBFile = document.getElementById('logoB-input').files[0];
   if (logoBFile) {
-    const readerB = new FileReader();
-    readerB.onload = function (e) {
-      document.getElementById('logoB').src = e.target.result;
-    };
-    readerB.readAsDataURL(logoBFile);
+    removeBackground(logoBFile)
+      .then(url => {
+        document.getElementById('logoB').src = url;
+      })
+      .catch(err => {
+        console.error('Błąd usuwania tła z logo B:', err);
+        alert('Nie udało się usunąć tła z logo B.');
+      });
   }
 });
 
+// Pobieranie plakatu jako PNG
 document.getElementById('download-btn').addEventListener('click', () => {
   const poster = document.getElementById('poster');
 
@@ -42,27 +52,36 @@ document.getElementById('download-btn').addEventListener('click', () => {
     link.click();
   });
 });
+
+// Funkcja usuwająca tło z obrazu przez API remove.bg
 async function removeBackground(file) {
   const reader = new FileReader();
+
   return new Promise((resolve, reject) => {
     reader.onload = async function () {
       const base64 = reader.result.split(',')[1];
 
-      const response = await fetch('/api/remove-bg', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ imageBase64: base64 })
-      });
+      try {
+        const response = await fetch('/api/remove-bg', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ imageBase64: base64 })
+        });
 
-      if (!response.ok) {
-        reject('Błąd usuwania tła');
+        if (!response.ok) {
+          const errorText = await response.text();
+          return reject(errorText);
+        }
+
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        resolve(url);
+      } catch (err) {
+        reject(err);
       }
-
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      resolve(url);
     };
+
+    reader.onerror = () => reject('Błąd odczytu pliku');
     reader.readAsDataURL(file);
   });
 }
-
