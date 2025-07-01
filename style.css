@@ -112,13 +112,15 @@ form button {
 .info-bar {
   position: absolute;
   bottom: 40px;
-  width: 100%;
+  left: 10px;
+  right: 10px;
   display: flex;
   justify-content: space-around;
   background: rgba(0, 0, 0, 0.7);
   padding: 20px;
   border-radius: 10px;
 }
+
 
 .info {
   display: flex;
