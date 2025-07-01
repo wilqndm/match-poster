@@ -106,22 +106,6 @@ function formatPolishDate(dateStr) {
   return `${dzien} ${miesiac} ${rok} (${dzienTygodnia})`;
 }
 
-function generateMatchDescription(data) {
-  const { teamA, teamB, date, time, location } = data;
-
-  const slogans = [
-    'Wszyscy na stadion!',
-    'Nie przegap tego starcia!',
-    'To będzie mecz pełen emocji!',
-    'Liczymy na Wasz doping!',
-    'Czas na piłkarskie widowisko!'
-  ];
-
-  const slogan = slogans[Math.floor(Math.random() * slogans.length)];
-
-  return `Już ${date} o ${time} na ${location} zmierzą się ${teamA} i ${teamB}. ${slogan}`;
-}
-
 document.getElementById('share-btn').addEventListener('click', () => {
   const teamA = document.getElementById('teamA').textContent;
   const teamB = document.getElementById('teamB').textContent;
