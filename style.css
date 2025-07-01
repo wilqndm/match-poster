@@ -148,3 +148,14 @@ form button {
   width: 24px;
   height: 24px;
 }
+
+#share-btn {
+  background: #1877f2;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
