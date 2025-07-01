@@ -89,7 +89,7 @@ form button {
 
 .vs-bar {
   position: absolute;
-  bottom: 100px; /* 80px height info-bar + 5px odstęp + 15px margines */
+  bottom: 125px; /* 40px (info-bar bottom) + 80px (info-bar height) + 5px przerwy */
   left: 10px;
   right: 10px;
   text-align: center;
