@@ -106,18 +106,6 @@ function formatPolishDate(dateStr) {
   return `${dzien} ${miesiac} ${rok} (${dzienTygodnia})`;
 }
 
-document.getElementById('share-btn').addEventListener('click', () => {
-  const teamA = document.getElementById('teamA').textContent;
-  const teamB = document.getElementById('teamB').textContent;
-  const date = document.getElementById('date').textContent;
-  const time = document.getElementById('time').textContent;
-  const location = document.getElementById('location').textContent;
 
-  const description = generateMatchDescription({ teamA, teamB, date, time, location });
-
-  const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(description)}`;
-
-  window.open(fbShareUrl, '_blank');
-});
 
 
