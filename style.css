@@ -67,7 +67,7 @@ form button {
 .matchday {
   position: absolute;
   top: 30px;
-  left: 150px;
+  left: 40px;
   font-size: 32px;
   font-weight: bold;
   color: #fff;
@@ -88,10 +88,9 @@ form button {
   display: block;
 }
 
-
 .vs-bar {
   position: absolute;
-  bottom: 130px; /* 40px (info-bar bottom) + 80px (info-bar height) + 5px przerwy */
+  bottom: 125px; /* 80px info-bar + 5px odstępu + 40px bottom */
   left: 10px;
   right: 10px;
   text-align: center;
@@ -101,7 +100,6 @@ form button {
   padding: 20px 0;
   border-radius: 10px;
 }
-
 
 .team-name {
   margin: 0 40px;
@@ -122,7 +120,6 @@ form button {
   padding: 20px;
   border-radius: 10px;
 }
-
 
 .info {
   display: flex;
