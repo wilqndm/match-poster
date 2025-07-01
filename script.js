@@ -5,7 +5,10 @@ document.getElementById('match-form').addEventListener('submit', function (e) {
   document.getElementById('matchday').textContent = `${document.getElementById('matchday-input').value}. kolejka "B" Klasa`;
   document.getElementById('teamA').textContent = document.getElementById('teamA-input').value;
   document.getElementById('teamB').textContent = document.getElementById('teamB-input').value;
-  document.getElementById('date').textContent = document.getElementById('date-input').value;
+
+  const dateValue = document.getElementById('date-input').value;
+  document.getElementById('date').textContent = formatPolishDate(dateValue);
+
   document.getElementById('time').textContent = document.getElementById('time-input').value;
   document.getElementById('location').textContent = document.getElementById('location-input').value;
 
@@ -84,4 +87,21 @@ async function removeBackground(file) {
     reader.onerror = () => reject('Błąd odczytu pliku');
     reader.readAsDataURL(file);
   });
+}
+
+// Funkcja formatująca datę na polski zapis z dniem tygodnia
+function formatPolishDate(dateStr) {
+  const dni = ['niedziela', 'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota'];
+  const miesiace = [
+    'stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca',
+    'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'
+  ];
+
+  const date = new Date(dateStr);
+  const dzien = date.getDate();
+  const miesiac = miesiace[date.getMonth()];
+  const rok = date.getFullYear();
+  const dzienTygodnia = dni[date.getDay()];
+
+  return `${dzien} ${miesiac} ${rok} (${dzienTygodnia})`;
 }
