@@ -23,22 +23,47 @@
       <button type="button" id="download-btn">📥 Pobierz plakat</button>
     </form>
 
-    <div class="poster" id="poster">
-      <div class="matchday" id="matchday">1. kolejka "B" Klasa</div>
+    <!-- Podgląd plakatu -->
+    <div class="poster" id="poster-preview">
+      <div class="matchday" id="matchday-preview">1. kolejka B Klasa</div>
+      <div class="logos">
+        <img id="logoA-preview" class="logo left" src="" alt="Logo A" />
+        <img id="logoB-preview" class="logo right" src="" alt="Logo B" />
+      </div>
+      <div class="vs-bar">
+        <div class="team" id="teamA-preview">Drużyna A</div>
+        <div class="vs">VS</div>
+        <div class="team" id="teamB-preview">Drużyna B</div>
+      </div>
+      <div class="info-bar">
+        <div class="info">
+          <img src="assets/icons/calendar.svg" alt="Data" />
+          <span id="date-preview">2025-08-12</span>
+        </div>
+        <div class="info">
+          <img src="assets/icons/clock.svg" alt="Godzina" />
+          <span id="time-preview">18:00</span>
+        </div>
+        <div class="info">
+          <img src="assets/icons/pin.svg" alt="Miejsce" />
+          <span id="location-preview">Stadion Narodowy</span>
+        </div>
+      </div>
+    </div>
 
+    <!-- Ukryty plakat do pobierania -->
+    <div class="poster hidden" id="poster-render">
+      <div class="matchday" id="matchday">1. kolejka B Klasa</div>
       <div class="logos">
         <img id="logoA" class="logo left" src="" alt="Logo A" />
         <img id="logoB" class="logo right" src="" alt="Logo B" />
       </div>
-
-  <div class="vs-bar" id="vs-bar">
-  <div class="team team-left" id="teamA">Drużyna A</div>
-  <div class="vs">VS</div>
-  <div class="team team-right" id="teamB">Drużyna B</div>
-</div>
-
-
-      <div class="info-bar" id="info-bar">
+      <div class="vs-bar">
+        <div class="team" id="teamA">Drużyna A</div>
+        <div class="vs">VS</div>
+        <div class="team" id="teamB">Drużyna B</div>
+      </div>
+      <div class="info-bar">
         <div class="info">
           <img src="assets/icons/calendar.svg" alt="Data" />
           <span id="date">2025-08-12</span>
