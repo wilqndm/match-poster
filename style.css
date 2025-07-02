@@ -64,6 +64,17 @@ form button {
   overflow: hidden;
 }
 
+#poster-preview {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 630;
+}
+
+.hidden {
+  display: none;
+}
+
 .matchday {
   position: absolute;
   top: 80px;
@@ -88,12 +99,9 @@ form button {
 .logo {
   width: 200px;
   height: auto;
-  display: block;
   object-fit: contain;
-  z-index: 1;
   mix-blend-mode: multiply;
 }
-
 
 .vs-bar {
   position: absolute;
@@ -156,21 +164,8 @@ form button {
     padding: 20px;
   }
 
-  .poster {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1200 / 630;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    transform: scale(1);
-  }
-
   form {
     width: 100%;
     max-width: 400px;
   }
 }
-
-
-
