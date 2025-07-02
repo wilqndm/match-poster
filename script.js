@@ -1,47 +1,34 @@
 document.getElementById('match-form').addEventListener('submit', function (e) {
   e.preventDefault();
 
-  // Ustawianie tekstów
-  document.getElementById('matchday').textContent = `${document.getElementById('matchday-input').value}. kolejka "B" Klasa`;
-  document.getElementById('teamA').textContent = document.getElementById('teamA-input').value;
-  document.getElementById('teamB').textContent = document.getElementById('teamB-input').value;
+  updatePosterContent('preview');
+  updatePosterContent('render');
 
-  const dateValue = document.getElementById('date-input').value;
-  document.getElementById('date').textContent = formatPolishDate(dateValue);
-
-  document.getElementById('time').textContent = document.getElementById('time-input').value;
-  document.getElementById('location').textContent = document.getElementById('location-input').value;
-
-  // Logo A – usuwanie tła
   const logoAFile = document.getElementById('logoA-input').files[0];
   if (logoAFile) {
-    removeBackground(logoAFile)
-      .then(url => {
-        document.getElementById('logoA').src = url;
-      })
-      .catch(err => {
-        console.error('Błąd usuwania tła z logo A:', err);
-        alert('Nie udało się usunąć tła z logo A.');
-      });
+    removeBackground(logoAFile).then(url => {
+      document.getElementById('logoA').src = url;
+      document.getElementById('logoA-preview').src = url;
+    }).catch(err => {
+      console.error('Błąd usuwania tła z logo A:', err);
+      alert('Nie udało się usunąć tła z logo A.');
+    });
   }
 
-  // Logo B – usuwanie tła
   const logoBFile = document.getElementById('logoB-input').files[0];
   if (logoBFile) {
-    removeBackground(logoBFile)
-      .then(url => {
-        document.getElementById('logoB').src = url;
-      })
-      .catch(err => {
-        console.error('Błąd usuwania tła z logo B:', err);
-        alert('Nie udało się usunąć tła z logo B.');
-      });
+    removeBackground(logoBFile).then(url => {
+      document.getElementById('logoB').src = url;
+      document.getElementById('logoB-preview').src = url;
+    }).catch(err => {
+      console.error('Błąd usuwania tła z logo B:', err);
+      alert('Nie udało się usunąć tła z logo B.');
+    });
   }
 });
 
-// Pobieranie plakatu jako PNG
 document.getElementById('download-btn').addEventListener('click', () => {
-  const poster = document.getElementById('poster');
+  const poster = document.getElementById('poster-render');
 
   html2canvas(poster, {
     useCORS: true,
@@ -56,7 +43,24 @@ document.getElementById('download-btn').addEventListener('click', () => {
   });
 });
 
-// Funkcja usuwająca tło z obrazu przez API remove.bg
+function updatePosterContent(type) {
+  const suffix = type === 'preview' ? '-preview' : '';
+
+  const matchday = document.getElementById('matchday-input').value;
+  const teamA = document.getElementById('teamA-input').value;
+  const teamB = document.getElementById('teamB-input').value;
+  const date = document.getElementById('date-input').value;
+  const time = document.getElementById('time-input').value;
+  const location = document.getElementById('location-input').value;
+
+  document.getElementById(`matchday${suffix}`).textContent = `${matchday}. kolejka B Klasa`;
+  document.getElementById(`teamA${suffix}`).textContent = teamA;
+  document.getElementById(`teamB${suffix}`).textContent = teamB;
+  document.getElementById(`date${suffix}`).textContent = formatPolishDate(date);
+  document.getElementById(`time${suffix}`).textContent = time;
+  document.getElementById(`location${suffix}`).textContent = location;
+}
+
 async function removeBackground(file) {
   const reader = new FileReader();
 
@@ -89,7 +93,6 @@ async function removeBackground(file) {
   });
 }
 
-// Funkcja formatująca datę na polski zapis z dniem tygodnia
 function formatPolishDate(dateStr) {
   const dni = ['niedziela', 'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota'];
   const miesiace = [
@@ -105,7 +108,3 @@ function formatPolishDate(dateStr) {
 
   return `${dzien} ${miesiac} ${rok} (${dzienTygodnia})`;
 }
-
-
-
-
