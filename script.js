@@ -132,3 +132,32 @@ document.getElementById('reset-btn').addEventListener('click', () => {
   document.getElementById('time').textContent = '18:00';
   document.getElementById('location').textContent = 'Stadion Narodowy';
 });
+
+// Obsługa logo gospodarza i gości
+function handleLogoInput(inputId, imgId) {
+  const input = document.getElementById(inputId);
+  const img = document.getElementById(imgId);
+
+  input.addEventListener('change', function () {
+    const file = this.files[0];
+    if (!file) {
+      img.src = '';
+      return;
+    }
+    if (!file.type.startsWith('image/')) {
+      alert('Wybrany plik nie jest obrazem!');
+      this.value = '';
+      img.src = '';
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// Obsługa logo gospodarza i gości
+handleLogoInput('logoA-input', 'logoA');
+handleLogoInput('logoB-input', 'logoB');
