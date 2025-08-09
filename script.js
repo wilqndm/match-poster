@@ -31,6 +31,11 @@ document.getElementById('match-form').addEventListener('submit', function (e) {
 
 document.getElementById('download-btn').addEventListener('click', () => {
   const poster = document.getElementById('poster');
+
+  // zapamiętaj skalę
+  const oldTransform = poster.style.transform;
+  poster.style.transform = 'scale(1)';
+
   html2canvas(poster, {
     useCORS: true,
     allowTaint: true,
@@ -41,6 +46,9 @@ document.getElementById('download-btn').addEventListener('click', () => {
     link.download = 'match-poster.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
+
+    // przywróć podgląd 50%
+    poster.style.transform = oldTransform;
   });
 });
 
