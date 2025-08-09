@@ -72,10 +72,11 @@ form button {
   background-size: 1200px 630px;
   position: relative;
   box-sizing: border-box;
-  padding: 40px;
+  padding: 0;
   overflow: hidden;
 }
 
+/* Pasek pod tekstem kolejki */
 .matchday-bar-container {
   position: absolute;
   top: 60px;
@@ -106,11 +107,13 @@ form button {
   z-index: 2;
 }
 
+/* Logo drużyn */
 .logos {
   position: absolute;
   top: 170px;
   left: 250px;
   width: 700px;
+  height: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -124,11 +127,13 @@ form button {
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
 }
 
+/* Pasek VS */
 .vs-bar {
   position: absolute;
   bottom: 125px;
-  left: 10px;
-  right: 10px;
+  left: 40px;
+  width: 1120px;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -154,11 +159,13 @@ form button {
   text-overflow: ellipsis;
 }
 
+/* Pasek informacji */
 .info-bar {
   position: absolute;
   bottom: 40px;
-  left: 10px;
-  right: 10px;
+  left: 40px;
+  width: 1120px;
+  height: auto;
   display: flex;
   justify-content: space-around;
   background: rgba(0, 0, 0, 0.7);
@@ -178,6 +185,7 @@ form button {
   height: 24px;
 }
 
+/* Logo w rogu */
 #corner-logo {
   position: absolute;
   top: 20px;
