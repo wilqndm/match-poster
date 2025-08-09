@@ -104,4 +104,27 @@ function formatPolishDate(dateStr) {
   const dzienTygodnia = dni[date.getDay()];
 
   return `${dzien} ${miesiac} ${rok} (${dzienTygodnia})`;
+  const matchTypeSelect = document.getElementById('match-type');
+const poster = document.getElementById('poster');
+const cornerLogo = document.getElementById('corner-logo');
+
+function updateMatchType() {
+  const type = matchTypeSelect.value;
+  if (type === 'liga') {
+    poster.style.backgroundImage = "url('assets/bg_liga.png')";
+    cornerLogo.src = 'assets/logo_liga.png';
+  } else if (type === 'puchar') {
+    poster.style.backgroundImage = "url('assets/bg_puchar.png')";
+    cornerLogo.src = 'assets/logo_puchar.jpg';
+  }
+}
+
+// Zmień tło i logo po zmianie wyboru
+matchTypeSelect.addEventListener('change', updateMatchType);
+
+// Ustaw domyślny typ meczu przy ładowaniu
+window.addEventListener('DOMContentLoaded', () => {
+  updateMatchType();
+  // ...pozostały kod inicjujący...
+});
 }
