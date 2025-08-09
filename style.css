@@ -106,9 +106,6 @@ form button {
 .logo {
   width: 200px;
   height: auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  background: #fff;
   object-fit: contain;
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
 }
