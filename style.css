@@ -1,40 +1,139 @@
+/* --- RESET & GLOBAL --- */
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f0f0f0;
   margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #111;
+  color: white;
   padding: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
   display: flex;
-  gap: 20px;
+  gap: 40px;
+  justify-content: center;
+  align-items: flex-start;
 }
 
+/* --- FORMULARZ --- */
 form {
-  flex: 1;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
+  background: #222;
+  padding: 20px 25px;
+  border-radius: 12px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
+form h2 {
+  margin: 0 0 20px 0;
+  font-weight: 700;
+  font-size: 22px;
+  color: #ffcc00;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #ddd;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+select {
+  margin-top: 6px;
+  padding: 9px 12px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #111;
+  color: white;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+select:focus {
+  outline: none;
+  border-color: #ffcc00;
+  background: #222;
+  color: #fff;
+  box-shadow: 0 0 8px #ffcc00aa;
+  transition: border-color 0.3s ease;
+  cursor: text;
+}
+
+input[type="file"] {
+  margin-top: 6px;
+  color: white;
+}
+
+.form-buttons {
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+}
+
+button {
+  background-color: #ffcc00;
+  border: none;
+  color: #222;
+  font-weight: 700;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+  flex: 1;
+}
+
+button#download-btn {
+  background-color: #00cc66;
+  color: white;
+}
+
+button:hover {
+  background-color: #e6b800;
+}
+
+button#download-btn:hover {
+  background-color: #00b359;
+}
+
+/* --- PLAKAT --- */
 .poster {
-  flex-shrink: 0;
   position: relative;
-  width: 1080px; /* pełna szerokość tła */
-  height: 1350px; /* pełna wysokość tła */
+  width: 1080px;  /* stała szerokość tła */
+  height: 630px;  /* stała wysokość tła */
   background-size: cover;
   background-position: center;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.9);
   transform: scale(0.5); /* podgląd 50% */
   transform-origin: top left;
-  border: 1px solid #ccc;
+  user-select: none;
+  overflow: hidden;
 }
 
+/* --- GÓRNY PASEK KOLEJKI --- */
 .matchday-bar-container {
   position: absolute;
   top: 20px;
   left: 0;
-  width: 90%; /* maksymalnie 90% szerokości plakatu */
+  width: 90%;  /* max 90% szerokości plakatu */
   height: 85px;
+  pointer-events: none;
+  z-index: 10;
 }
 
 .matchday-bar {
@@ -42,54 +141,84 @@ form {
   height: 100%;
 }
 
-.matchday {
-  position: absolute;
-  top: 20px;
-  left: 15px;
-  font-size: 28px;
-  color: white;
-  font-weight: bold;
+#matchday-bar-shape {
+  transition: fill 0.3s ease;
 }
 
+.matchday {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  font-size: 36px;
+  font-weight: 900;
+  color: white;
+  user-select: text;
+  pointer-events: none;
+  z-index: 20;
+  text-shadow: 0 0 5px rgba(0,0,0,0.7);
+}
+
+/* --- LOGA DRUŻYN --- */
 .logos {
   position: absolute;
-  top: 250px;
+  top: 150px;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0 200px; /* równy margines od środka */
+  padding: 0 180px;
+  pointer-events: none;
+  z-index: 10;
 }
 
 .logo {
-  width: 250px;
-  height: 250px;
+  width: 220px;
+  height: 220px;
   object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
+  user-select: none;
 }
 
+/* --- PASEK VS --- */
 .vs-bar {
   position: absolute;
-  top: 550px;
+  top: 400px;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 50px;
+  align-items: center;
+  gap: 40px;
   font-size: 48px;
-  color: white;
-  font-weight: bold;
+  font-weight: 800;
+  color: #ffcc00;
+  text-shadow: 0 0 5px rgba(0,0,0,0.7);
+  user-select: none;
+  pointer-events: none;
 }
 
+.team {
+  max-width: 320px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- PASEK INFO NA DOLE --- */
 .info-bar {
   position: absolute;
-  bottom: 50px;
+  bottom: 30px;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 60px;
-  font-size: 28px;
+  gap: 70px;
+  font-size: 22px;
+  font-weight: 600;
   color: white;
+  user-select: none;
+  pointer-events: none;
+  text-shadow: 0 0 5px rgba(0,0,0,0.7);
 }
 
 .info {
@@ -99,6 +228,20 @@ form {
 }
 
 .info img {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.8));
+}
+
+/* --- LOGO W ROGU --- */
+#corner-logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 110px;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+  filter: drop-shadow(0 0 5px rgba(0,0,0,0.7));
+  z-index: 30;
 }
