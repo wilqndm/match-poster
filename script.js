@@ -1,49 +1,36 @@
-// Obsługa formularza meczu
 document.getElementById('match-form').addEventListener('submit', function (e) {
   e.preventDefault();
 
-  // Ustawianie tekstów
-  document.getElementById('matchday').textContent = `${document.getElementById('matchday-input').value}`;
+  document.getElementById('matchday').textContent = document.getElementById('matchday-input').value;
   document.getElementById('teamA').textContent = document.getElementById('teamA-input').value;
   document.getElementById('teamB').textContent = document.getElementById('teamB-input').value;
 
   const dateValue = document.getElementById('date-input').value;
   document.getElementById('date').textContent = formatPolishDate(dateValue);
-
   document.getElementById('time').textContent = document.getElementById('time-input').value;
   document.getElementById('location').textContent = document.getElementById('location-input').value;
 
-  // Logo A – usuwanie tła
   const logoAFile = document.getElementById('logoA-input').files[0];
   if (logoAFile) {
-    removeBackground(logoAFile)
-      .then(url => {
-        document.getElementById('logoA').src = url;
-      })
-      .catch(err => {
-        console.error('Błąd usuwania tła z logo A:', err);
-        alert('Nie udało się usunąć tła z logo A.');
-      });
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      document.getElementById('logoA').src = e.target.result;
+    };
+    reader.readAsDataURL(logoAFile);
   }
 
-  // Logo B – usuwanie tła
   const logoBFile = document.getElementById('logoB-input').files[0];
   if (logoBFile) {
-    removeBackground(logoBFile)
-      .then(url => {
-        document.getElementById('logoB').src = url;
-      })
-      .catch(err => {
-        console.error('Błąd usuwania tła z logo B:', err);
-        alert('Nie udało się usunąć tła z logo B.');
-      });
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      document.getElementById('logoB').src = e.target.result;
+    };
+    reader.readAsDataURL(logoBFile);
   }
 });
 
-// Pobieranie plakatu jako PNG
 document.getElementById('download-btn').addEventListener('click', () => {
   const poster = document.getElementById('poster');
-
   html2canvas(poster, {
     useCORS: true,
     allowTaint: true,
@@ -57,40 +44,6 @@ document.getElementById('download-btn').addEventListener('click', () => {
   });
 });
 
-// Funkcja usuwająca tło z obrazu przez API remove.bg
-async function removeBackground(file) {
-  const reader = new FileReader();
-
-  return new Promise((resolve, reject) => {
-    reader.onload = async function () {
-      const base64 = reader.result.split(',')[1];
-
-      try {
-        const response = await fetch('/api/remove-bg', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ imageBase64: base64 })
-        });
-
-        if (!response.ok) {
-          const errorText = await response.text();
-          return reject(errorText);
-        }
-
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        resolve(url);
-      } catch (err) {
-        reject(err);
-      }
-    };
-
-    reader.onerror = () => reject('Błąd odczytu pliku');
-    reader.readAsDataURL(file);
-  });
-}
-
-// Funkcja formatująca datę na polski zapis z dniem tygodnia
 function formatPolishDate(dateStr) {
   const dni = ['niedziela', 'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota'];
   const miesiace = [
@@ -99,21 +52,17 @@ function formatPolishDate(dateStr) {
   ];
 
   const date = new Date(dateStr);
-  if (isNaN(date)) return ''; // zabezpieczenie, gdy pole daty puste/niepoprawne
-
+  if (isNaN(date)) return '';
   const dzien = date.getDate();
   const miesiac = miesiace[date.getMonth()];
   const rok = date.getFullYear();
   const dzienTygodnia = dni[date.getDay()];
-
   return `${dzien} ${miesiac} ${rok} (${dzienTygodnia})`;
 }
 
-// Obsługa wyboru typu meczu (liga/puchar)
 const matchTypeSelect = document.getElementById('match-type');
 const poster = document.getElementById('poster');
 const cornerLogo = document.getElementById('corner-logo');
-// Polygon w SVG pasku (ważne: w HTML musi istnieć <polygon id="matchday-bar-shape">)
 const matchdayBarShape = document.getElementById('matchday-bar-shape');
 
 function updateMatchType() {
@@ -121,27 +70,23 @@ function updateMatchType() {
   if (type === 'liga') {
     poster.style.backgroundImage = "url('assets/bg_liga.png')";
     cornerLogo.src = 'assets/logo_liga.png';
-    if (matchdayBarShape) matchdayBarShape.setAttribute('fill', '#e4022e'); // czerwony
+    if (matchdayBarShape) matchdayBarShape.setAttribute('fill', '#e4022e');
   } else if (type === 'puchar') {
     poster.style.backgroundImage = "url('assets/bg_puchar.png')";
     cornerLogo.src = 'assets/logo_puchar-2.png';
-    if (matchdayBarShape) matchdayBarShape.setAttribute('fill', '#8cbe39'); // zielony
+    if (matchdayBarShape) matchdayBarShape.setAttribute('fill', '#8cbe39');
   }
 }
 
-// Zmień tło i logo po zmianie wyboru
 matchTypeSelect.addEventListener('change', updateMatchType);
 
-// Ustaw domyślny typ meczu oraz datę i godzinę po załadowaniu strony
 window.addEventListener('DOMContentLoaded', () => {
   updateMatchType();
-
   const dateInput = document.getElementById('date-input');
   const timeInput = document.getElementById('time-input');
   if (dateInput) {
     const today = new Date();
     dateInput.valueAsDate = today;
-    // Ustaw też tekst w podglądzie, jeśli istnieje domyślna sekcja daty
     const dateEl = document.getElementById('date');
     if (dateEl) dateEl.textContent = formatPolishDate(dateInput.value);
   }
@@ -152,10 +97,8 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Obsługa przycisku "Wyczyść"
 document.getElementById('reset-btn').addEventListener('click', () => {
   document.getElementById('match-form').reset();
-  // Resetuj podgląd plakatu do wartości domyślnych
   document.getElementById('matchday').textContent = '1. kolejka "B" Klasa';
   document.getElementById('teamA').textContent = 'Drużyna A';
   document.getElementById('teamB').textContent = 'Drużyna B';
@@ -167,32 +110,3 @@ document.getElementById('reset-btn').addEventListener('click', () => {
   matchTypeSelect.value = 'liga';
   updateMatchType();
 });
-
-// Obsługa logo gospodarza i gości (podgląd przy wyborze pliku)
-function handleLogoInput(inputId, imgId) {
-  const input = document.getElementById(inputId);
-  const img = document.getElementById(imgId);
-
-  input.addEventListener('change', function () {
-    const file = this.files[0];
-    if (!file) {
-      img.src = '';
-      return;
-    }
-    if (!file.type.startsWith('image/')) {
-      alert('Wybrany plik nie jest obrazem!');
-      this.value = '';
-      img.src = '';
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
-// Obsługa logo gospodarza i gości (podgląd)
-handleLogoInput('logoA-input', 'logoA');
-handleLogoInput('logoB-input', 'logoB');
