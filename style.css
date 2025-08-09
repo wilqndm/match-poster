@@ -33,7 +33,8 @@ form label {
   font-size: 14px;
 }
 
-form input, form select {
+form input,
+form select {
   padding: 8px;
   margin-top: 4px;
   border-radius: 4px;
