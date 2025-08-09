@@ -121,7 +121,7 @@ function updateMatchType() {
     matchdayBar.style.background = '#e4022e'; // czerwony
   } else if (type === 'puchar') {
     poster.style.backgroundImage = "url('assets/bg_puchar.png')";
-    cornerLogo.src = 'assets/logo_puchar.jpg';
+    cornerLogo.src = 'assets/logo_puchar.png';
     matchdayBar.style.background = '#8cbe39'; // zielony
   }
 }
