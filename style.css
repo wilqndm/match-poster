@@ -1,199 +1,180 @@
 body {
-margin: 0;
-font-family: sans-serif;
-background: #111;
-color: white;
+  margin: 0;
+  font-family: sans-serif;
+  background: #111;
+  color: white;
 }
 
 .container {
-display: flex;
-flex-wrap: wrap;
-gap: 40px;
-padding: 40px;
-justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 40px;
+  justify-content: center;
 }
 
 form {
-display: flex;
-flex-direction: column;
-gap: 10px;
-width: 300px;
-background: #222;
-padding: 20px;
-border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  background: #222;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 form h2 {
-margin-top: 0;
+  margin-top: 0;
 }
 
 form label {
-display: flex;
-flex-direction: column;
-font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
 }
 
 form input {
-padding: 6px;
-margin-top: 4px;
-border-radius: 4px;
-border: none;
+  padding: 6px;
+  margin-top: 4px;
+  border-radius: 4px;
+  border: none;
 }
 
 form button {
-margin-top: 10px;
-padding: 10px;
-background: #ffcc00;
-border: none;
-font-weight: bold;
-cursor: pointer;
-border-radius: 5px;
+  margin-top: 10px;
+  padding: 10px;
+  background: #ffcc00;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 #download-btn {
-background: #00cc66;
+  background: #00cc66;
 }
 
 .poster {
-width: 1200px;
-height: 630px;
-background: url('assets/bg_liga.png') no-repeat center/cover;
-position: relative;
-box-sizing: border-box;
-padding: 40px;
-overflow: hidden;
+  width: 1200px;
+  height: 630px;
+  background: url('assets/bg_liga.png') no-repeat center/cover;
+  position: relative;
+  box-sizing: border-box;
+  padding: 40px;
+  overflow: hidden;
 }
 
-/* Pasek pod napisem kolejki */
-.matchday-bar-container {
-position: absolute;
-top: 80px;
-  left: 300px;
-  width: 80%;
-  left: 0;
-  width: 100%;
-z-index: 2;
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-}
-
-
-/* Pasek pod tekstem, wystaje 10px nad tekst, sciety 45 stopni */
+/* Pasek pod logiem ligi/pucharu */
 .matchday-bar {
   position: absolute;
   left: 0;
-  top: 0;
+  top: 110px; /* logo ma 80px wysokości + 20px top, pasek zaczyna się pod logo */
   width: 80%;
-  height: 45px; /* 15px na pasek + 10px nad tekstem + 10px pod tekstem + trochę zapasu na scięcie */
+  height: 65px;
   background: #e32430; /* domyślnie czerwień ligi, JS zmienia na zieleń dla pucharu */
   clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%);
   z-index: 1;
 }
 
-.matchday {
-  position: relative;
-font-size: 42px;
-font-weight: bold;
-color: #fff;
-  margin-bottom: 10px; /* 10px pod tekstem */
-  position: relative;
-  margin-top: 10px; /* odstęp od góry paska */
-  margin-left: 300px; /* ustaw tekst w odpowiednim miejscu na grafice */
-  margin-bottom: 10px; /* odstęp pod tekstem */
-z-index: 2;
+/* Kontener na kolejkę */
+.matchday-bar-container {
+  position: absolute;
+  top: 120px; /* logo + pasek odstęp */
+  left: 300px;
+  width: 80%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-/* Pasek pod tekstem, wystaje 10px nad tekst */
-.matchday-bar {
-  width: 80%; /* kończy się na 80% szerokości kontenera */
-  height: 65px;
-  background: #e32430; /* intensywna czerwień dla ligi, domyślnie */
-  border-radius: 0 40px 40px 0; /* lekko ścięty / zaokrąglony prawy koniec */
-  margin-top: -10px; /* wystaje 10px nad tekst */
-  margin-bottom: 0;
+.matchday {
   position: relative;
-  z-index: 1;
+  font-size: 42px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+  z-index: 2;
 }
 
 .logos {
-position: absolute;
-top: 170px;
-left: 0;
-right: 0;
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 0 250px;
-z-index: 1;
+  position: absolute;
+  top: 170px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 250px;
+  z-index: 1;
 }
 
 .logo {
-width: 200px;
-height: auto;
-object-fit: contain;
-filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
 }
 
 .vs-bar {
-position: absolute;
-bottom: 125px;
-left: 10px;
-right: 10px;
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 40px;
-font-size: 40px;
-font-weight: bold;
-background: rgba(0, 0, 0, 0.6);
-padding: 20px;
-border-radius: 10px;
-text-align: center;
+  position: absolute;
+  bottom: 125px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  font-size: 40px;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .vs {
-color: #ffcc00;
-min-width: 60px;
+  color: #ffcc00;
+  min-width: 60px;
 }
 
 .team {
-flex: 1;
-text-align: center;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .info-bar {
-position: absolute;
-bottom: 40px;
-left: 10px;
-right: 10px;
-display: flex;
-justify-content: space-around;
-background: rgba(0, 0, 0, 0.7);
-padding: 20px;
-border-radius: 10px;
+  position: absolute;
+  bottom: 40px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-around;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .info {
-display: flex;
-align-items: center;
-gap: 10px;
-font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
 }
 
 .info img {
-width: 24px;
-height: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 #corner-logo {
-position: absolute;
-top: 20px;
-left: 20px;
-width: 80px;
-height: auto;
-z-index: 2;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 80px;
+  height: auto;
+  z-index: 2;
 }
