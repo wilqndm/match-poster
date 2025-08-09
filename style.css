@@ -76,19 +76,25 @@ form button {
   align-items: flex-start;
 }
 
-.matchday-bar {
-  width: 100%;
-  height: 15px;
-  margin-bottom: 15px;
-  background: #d60000; /* domyślnie czerwony */
-  clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%);
-}
-
 .matchday {
   font-size: 42px;
   font-weight: bold;
   color: #fff;
-  margin-bottom: 15px;
+  margin-bottom: 10px; /* 10px pod tekstem */
+  position: relative;
+  z-index: 2;
+}
+
+/* Pasek pod tekstem, wystaje 10px nad tekst */
+.matchday-bar {
+  width: 80%; /* kończy się na 80% szerokości kontenera */
+  height: 15px;
+  background: #e32430; /* intensywna czerwień dla ligi, domyślnie */
+  border-radius: 0 40px 40px 0; /* lekko ścięty / zaokrąglony prawy koniec */
+  margin-top: -10px; /* wystaje 10px nad tekst */
+  margin-bottom: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .logos {
