@@ -1,3 +1,4 @@
+// Obsługa formularza meczu
 document.getElementById('match-form').addEventListener('submit', function (e) {
   e.preventDefault();
 
@@ -104,7 +105,10 @@ function formatPolishDate(dateStr) {
   const dzienTygodnia = dni[date.getDay()];
 
   return `${dzien} ${miesiac} ${rok} (${dzienTygodnia})`;
-  const matchTypeSelect = document.getElementById('match-type');
+}
+
+// Obsługa wyboru typu meczu (liga/puchar)
+const matchTypeSelect = document.getElementById('match-type');
 const poster = document.getElementById('poster');
 const cornerLogo = document.getElementById('corner-logo');
 
@@ -122,9 +126,62 @@ function updateMatchType() {
 // Zmień tło i logo po zmianie wyboru
 matchTypeSelect.addEventListener('change', updateMatchType);
 
-// Ustaw domyślny typ meczu przy ładowaniu
+// Ustaw domyślny typ meczu oraz datę i godzinę po załadowaniu strony
 window.addEventListener('DOMContentLoaded', () => {
   updateMatchType();
-  // ...pozostały kod inicjujący...
+
+  const dateInput = document.getElementById('date-input');
+  const timeInput = document.getElementById('time-input');
+  if (dateInput) {
+    const today = new Date();
+    dateInput.valueAsDate = today;
+  }
+  if (timeInput) {
+    timeInput.value = "18:00";
+  }
 });
+
+// Obsługa przycisku "Wyczyść"
+document.getElementById('reset-btn').addEventListener('click', () => {
+  document.getElementById('match-form').reset();
+  // Resetuj podgląd plakatu do wartości domyślnych
+  document.getElementById('matchday').textContent = '1. kolejka "B" Klasa';
+  document.getElementById('teamA').textContent = 'Drużyna A';
+  document.getElementById('teamB').textContent = 'Drużyna B';
+  document.getElementById('logoA').src = '';
+  document.getElementById('logoB').src = '';
+  document.getElementById('date').textContent = '2025-08-12';
+  document.getElementById('time').textContent = '18:00';
+  document.getElementById('location').textContent = 'Stadion Narodowy';
+  matchTypeSelect.value = 'liga';
+  updateMatchType();
+});
+
+// Obsługa logo gospodarza i gości (podgląd przy wyborze pliku)
+function handleLogoInput(inputId, imgId) {
+  const input = document.getElementById(inputId);
+  const img = document.getElementById(imgId);
+
+  input.addEventListener('change', function () {
+    const file = this.files[0];
+    if (!file) {
+      img.src = '';
+      return;
+    }
+    if (!file.type.startsWith('image/')) {
+      alert('Wybrany plik nie jest obrazem!');
+      this.value = '';
+      img.src = '';
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
 }
+
+// Obsługa logo gospodarza i gości (podgląd)
+handleLogoInput('logoA-input', 'logoA');
+handleLogoInput('logoB-input', 'logoB');
