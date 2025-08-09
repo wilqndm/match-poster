@@ -34,10 +34,19 @@ form label {
 }
 
 form input {
-  padding: 6px;
+  padding: 8px;
   margin-top: 4px;
   border-radius: 4px;
   border: none;
+  background: #222;
+  color: #fff;
+  font-size: 16px;
+  border: 1px solid #888;
+}
+
+form input[type="date"], 
+form input[type="time"] {
+  cursor: pointer;
 }
 
 form button {
@@ -67,7 +76,7 @@ form button {
 /* Pasek pod tekstem kolejki, NIE przykrywa logo, zaczyna się od lewej krawędzi grafiki */
 .matchday-bar-container {
   position: absolute;
-  top: 60px; /* logo ma 80px wysokości + 20px odstępu = 100px, pasek 10px niżej */
+  top: 60px;
   left: 0px;
   width: 100%;
   z-index: 2;
@@ -80,7 +89,7 @@ form button {
   top: 0;
   width: 90%;
   height: 85px;
-  background: #e4022e; /* kolor zmieniany w JS dla pucharu */
+  background: #e4022e;
   clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
   z-index: 1;
   pointer-events: none;
