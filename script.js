@@ -118,11 +118,11 @@ function updateMatchType() {
   if (type === 'liga') {
     poster.style.backgroundImage = "url('assets/bg_liga.png')";
     cornerLogo.src = 'assets/logo_liga.png';
-    matchdayBar.style.background = '#d60000'; // czerwony
+    matchdayBar.style.background = '#e4022e'; // czerwony
   } else if (type === 'puchar') {
     poster.style.backgroundImage = "url('assets/bg_puchar.png')";
     cornerLogo.src = 'assets/logo_puchar.jpg';
-    matchdayBar.style.background = '#00a650'; // zielony
+    matchdayBar.style.background = '#8cbe39'; // zielony
   }
 }
 
