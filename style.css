@@ -67,7 +67,7 @@ form button {
 /* Pasek pod tekstem kolejki, NIE przykrywa logo, zaczyna się od lewej krawędzi grafiki */
 .matchday-bar-container {
   position: absolute;
-  top: 80px; /* logo ma 80px wysokości + 20px odstępu = 100px, pasek 10px niżej */
+  top: 40px; /* logo ma 80px wysokości + 20px odstępu = 100px, pasek 10px niżej */
   left: 0px;
   width: 100%;
   z-index: 2;
@@ -80,7 +80,7 @@ form button {
   top: 0;
   width: 80%;
   height: 85px;
-  background: #e32430; /* kolor zmieniany w JS dla pucharu */
+  background: #e4022e; /* kolor zmieniany w JS dla pucharu */
   clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
   z-index: 1;
   pointer-events: none;
