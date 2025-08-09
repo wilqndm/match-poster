@@ -1,73 +1,104 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Match Poster Generator</title>
-<link rel="stylesheet" href="style.css" />
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Match Poster Generator</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- html2canvas do eksportu plakatu -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
+  <!-- Twój skrypt aplikacji -->
+  <script src="script.js" defer></script>
 </head>
 <body>
-<div class="container">
-<form id="match-form">
-<h2>Ustawienia meczu</h2>
-<label>
-Rodzaj meczu:
-<select id="match-type">
-<option value="liga">Liga</option>
-<option value="puchar">Puchar</option>
-</select>
-</label>
-<label>Kolejka: <input type="text" id="matchday-input" placeholder="np. 1. kolejka &quot;B&quot; Klasa" /></label>
-<label>Gospodarz: <input type="text" id="teamA-input" placeholder="Nazwa gospodarza" /></label>
-<label>Logo Gospodarz: <input type="file" id="logoA-input" accept="image/*" /></label>
-<label>Goście: <input type="text" id="teamB-input" placeholder="Nazwa gości" /></label>
-<label>Logo Goście: <input type="file" id="logoB-input" accept="image/*" /></label>
-      <label>Data: <input type="date" id="date-input" /></label>
-      <label>Godzina: <input type="time" id="time-input" /></label>
-<label>Miejsce: <input type="text" id="location-input" placeholder="np. Stadion Narodowy" /></label>
-<div style="margin-top:10px;">
-<button type="submit">Zastosuj</button>
-<button type="button" id="download-btn">📥 Pobierz plakat</button>
-<button type="button" id="reset-btn">Wyczyść</button>
-</div>
-</form>
+  <div class="container">
+    <form id="match-form">
+      <h2>Ustawienia meczu</h2>
 
-<div class="poster" id="poster">
-<img id="corner-logo" src="assets/logo_liga.png" alt="Logo typu" />
-<div class="matchday-bar-container">
-<div class="matchday-bar" id="matchday-bar"></div>
-<div class="matchday" id="matchday">1. kolejka "B" Klasa</div>
-</div>
+      <label>
+        Rodzaj meczu:
+        <select id="match-type">
+          <option value="liga">Liga</option>
+          <option value="puchar">Puchar</option>
+        </select>
+      </label>
 
-<div class="logos">
-<img id="logoA" class="logo left" src="" alt="Logo A" />
-<img id="logoB" class="logo right" src="" alt="Logo B" />
-</div>
+      <label>
+        Kolejka:
+        <input type="text" id="matchday-input" placeholder='np. 1. kolejka "B" Klasa' />
+      </label>
 
-<div class="vs-bar" id="vs-bar">
-<div class="team team-left" id="teamA">Drużyna A</div>
-<div class="vs">VS</div>
-<div class="team team-right" id="teamB">Drużyna B</div>
-</div>
+      <label>
+        Gospodarz:
+        <input type="text" id="teamA-input" placeholder="Nazwa gospodarza" />
+      </label>
 
-<div class="info-bar" id="info-bar">
-<div class="info">
-<img src="assets/icons/calendar.svg" alt="Data" />
-<span id="date">2025-08-12</span>
-</div>
-<div class="info">
-<img src="assets/icons/clock.svg" alt="Godzina" />
-<span id="time">18:00</span>
-</div>
-<div class="info">
-<img src="assets/icons/pin.svg" alt="Miejsce" />
-<span id="location">Stadion Narodowy</span>
-</div>
-</div>
-</div>
-</div>
+      <label>
+        Logo Gospodarz:
+        <input type="file" id="logoA-input" accept="image/*" />
+      </label>
 
-<script src="script.js"></script>
-</body>
-</html>
+      <label>
+        Goście:
+        <input type="text" id="teamB-input" placeholder="Nazwa gości" />
+      </label>
+
+      <label>
+        Logo Goście:
+        <input type="file" id="logoB-input" accept="image/*" />
+      </label>
+
+      <label>
+        Data:
+        <input type="date" id="date-input" />
+      </label>
+
+      <label>
+        Godzina:
+        <input type="time" id="time-input" />
+      </label>
+
+      <label>
+        Miejsce:
+        <input type="text" id="location-input" placeholder="np. Stadion Narodowy" />
+      </label>
+
+      <div style="margin-top:10px;">
+        <button type="submit">Zastosuj</button>
+        <button type="button" id="download-btn">📥 Pobierz plakat</button>
+        <button type="button" id="reset-btn">Wyczyść</button>
+      </div>
+    </form>
+
+    <div class="poster" id="poster">
+      <img id="corner-logo" src="assets/logo_liga.png" alt="Logo typu" />
+
+      <!-- Pasek kolejki jako SVG (z polygonem), zamiast clip-path -->
+      <div class="matchday-bar-container">
+        <svg class="matchday-bar" width="100%" height="85" viewBox="0 0 100 85" preserveAspectRatio="none" aria-hidden="true">
+          <polygon id="matchday-bar-shape" points="0,0 100,0 95,85 0,85" fill="#e4022e"></polygon>
+        </svg>
+        <div class="matchday" id="matchday">1. kolejka "B" Klasa</div>
+      </div>
+
+      <div class="logos">
+        <img id="logoA" class="logo left" src="" alt="Logo gospodarza" />
+        <img id="logoB" class="logo right" src="" alt="Logo gości" />
+      </div>
+
+      <div class="vs-bar" id="vs-bar">
+        <div class="team team-left" id="teamA">Drużyna A</div>
+        <div class="vs">VS</div>
+        <div class="team team-right" id="teamB">Drużyna B</div>
+      </div>
+
+      <div class="info-bar" id="info-bar">
+        <div class="info">
+          <img src="assets/icons/calendar.svg" alt="Data" />
+          <span id="date">2025-08-12</span>
+        </div>
+        <div class="info">
+          <img src="assets/icons/clock.svg" alt="Godzina" />
+          <span id="time">18:00</span>
+        </div>
+        <div class="info">
