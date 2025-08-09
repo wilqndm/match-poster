@@ -3,7 +3,7 @@ document.getElementById('match-form').addEventListener('submit', function (e) {
   e.preventDefault();
 
   // Ustawianie tekstów
-   document.getElementById('matchday').textContent = `${document.getElementById('matchday-input').value}`;
+  document.getElementById('matchday').textContent = `${document.getElementById('matchday-input').value}`;
   document.getElementById('teamA').textContent = document.getElementById('teamA-input').value;
   document.getElementById('teamB').textContent = document.getElementById('teamB-input').value;
 
@@ -99,6 +99,8 @@ function formatPolishDate(dateStr) {
   ];
 
   const date = new Date(dateStr);
+  if (isNaN(date)) return ''; // zabezpieczenie, gdy pole daty puste/niepoprawne
+
   const dzien = date.getDate();
   const miesiac = miesiace[date.getMonth()];
   const rok = date.getFullYear();
@@ -111,18 +113,19 @@ function formatPolishDate(dateStr) {
 const matchTypeSelect = document.getElementById('match-type');
 const poster = document.getElementById('poster');
 const cornerLogo = document.getElementById('corner-logo');
-const matchdayBar = document.getElementById('matchday-bar');
+// Polygon w SVG pasku (ważne: w HTML musi istnieć <polygon id="matchday-bar-shape">)
+const matchdayBarShape = document.getElementById('matchday-bar-shape');
 
 function updateMatchType() {
   const type = matchTypeSelect.value;
   if (type === 'liga') {
     poster.style.backgroundImage = "url('assets/bg_liga.png')";
     cornerLogo.src = 'assets/logo_liga.png';
-    matchdayBar.style.background = '#e4022e'; // czerwony
+    if (matchdayBarShape) matchdayBarShape.setAttribute('fill', '#e4022e'); // czerwony
   } else if (type === 'puchar') {
     poster.style.backgroundImage = "url('assets/bg_puchar.png')";
     cornerLogo.src = 'assets/logo_puchar-2.png';
-    matchdayBar.style.background = '#8cbe39'; // zielony
+    if (matchdayBarShape) matchdayBarShape.setAttribute('fill', '#8cbe39'); // zielony
   }
 }
 
@@ -138,9 +141,14 @@ window.addEventListener('DOMContentLoaded', () => {
   if (dateInput) {
     const today = new Date();
     dateInput.valueAsDate = today;
+    // Ustaw też tekst w podglądzie, jeśli istnieje domyślna sekcja daty
+    const dateEl = document.getElementById('date');
+    if (dateEl) dateEl.textContent = formatPolishDate(dateInput.value);
   }
   if (timeInput) {
-    timeInput.value = "18:00";
+    timeInput.value = '18:00';
+    const timeEl = document.getElementById('time');
+    if (timeEl) timeEl.textContent = timeInput.value;
   }
 });
 
