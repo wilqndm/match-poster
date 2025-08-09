@@ -131,8 +131,8 @@ form button {
 .vs-bar {
   position: absolute;
   bottom: 125px;
-  left: 40px;
-  width: 1120px;
+  left: 10px;
+  width: 1180px;
   height: auto;
   display: flex;
   justify-content: center;
@@ -146,6 +146,20 @@ form button {
   text-align: center;
 }
 
+/* Pasek informacji */
+.info-bar {
+  position: absolute;
+  bottom: 40px;
+  left: 10px;
+  width: 1180px;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+}
+
 .vs {
   color: #ffcc00;
   min-width: 60px;
@@ -157,20 +171,6 @@ form button {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-/* Pasek informacji */
-.info-bar {
-  position: absolute;
-  bottom: 40px;
-  left: 40px;
-  width: 1120px;
-  height: auto;
-  display: flex;
-  justify-content: space-around;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 20px;
-  border-radius: 10px;
 }
 
 .info {
