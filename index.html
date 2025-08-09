@@ -5,34 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Match Poster Generator</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Bootstrap CSS for better date/time UX -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
   <div class="container">
-    <form id="match-form">
-      <h2>Ustawienia meczu</h2>
-      <label>
-        Rodzaj meczu:
-        <select id="match-type">
+    <form id="match-form" class="needs-validation" novalidate>
+      <h2 class="mb-3">Ustawienia meczu</h2>
+      <div class="mb-3">
+        <label for="match-type" class="form-label">Rodzaj meczu:</label>
+        <select id="match-type" class="form-select">
           <option value="liga">Liga</option>
           <option value="puchar">Puchar</option>
         </select>
-      </label>
-      <label>Kolejka: <input type="text" id="matchday-input" placeholder="np. 1. kolejka &quot;B&quot; Klasa" /></label>
-      <label>Gospodarz: <input type="text" id="teamA-input" placeholder="Nazwa gospodarza" /></label>
-      <label>Logo Gospodarz: <input type="file" id="logoA-input" accept="image/*" /></label>
-      <label>Goście: <input type="text" id="teamB-input" placeholder="Nazwa gości" /></label>
-      <label>Logo Goście: <input type="file" id="logoB-input" accept="image/*" /></label>
-      <label for="match-date">Data meczu</label>
-<input type="date" id="match-date" name="match-date">
-
-<label for="match-time">Godzina meczu</label>
-<input type="time" id="match-time" name="match-time">
-      <label>Miejsce: <input type="text" id="location-input" placeholder="np. Stadion Narodowy" /></label>
-      <div style="margin-top:10px;">
-        <button type="submit">Zastosuj</button>
-        <button type="button" id="download-btn">📥 Pobierz plakat</button>
-        <button type="button" id="reset-btn">Wyczyść</button>
+      </div>
+      <div class="mb-3">
+        <label for="matchday-input" class="form-label">Kolejka:</label>
+        <input type="text" id="matchday-input" class="form-control" placeholder="np. 1. kolejka &quot;B&quot; Klasa" />
+      </div>
+      <div class="mb-3">
+        <label for="teamA-input" class="form-label">Gospodarz:</label>
+        <input type="text" id="teamA-input" class="form-control" placeholder="Nazwa gospodarza" />
+      </div>
+      <div class="mb-3">
+        <label for="logoA-input" class="form-label">Logo Gospodarz:</label>
+        <input type="file" id="logoA-input" class="form-control" accept="image/*" />
+      </div>
+      <div class="mb-3">
+        <label for="teamB-input" class="form-label">Goście:</label>
+        <input type="text" id="teamB-input" class="form-control" placeholder="Nazwa gości" />
+      </div>
+      <div class="mb-3">
+        <label for="logoB-input" class="form-label">Logo Goście:</label>
+        <input type="file" id="logoB-input" class="form-control" accept="image/*" />
+      </div>
+      <div class="mb-3">
+        <label for="match-date" class="form-label">Data meczu</label>
+        <input type="date" id="match-date" name="match-date" class="form-control"/>
+      </div>
+      <div class="mb-3">
+        <label for="match-time" class="form-label">Godzina meczu</label>
+        <input type="time" id="match-time" name="match-time" class="form-control"/>
+      </div>
+      <div class="mb-3">
+        <label for="location-input" class="form-label">Miejsce:</label>
+        <input type="text" id="location-input" class="form-control" placeholder="np. Stadion Narodowy" />
+      </div>
+      <div class="mt-3 d-flex gap-2">
+        <button type="submit" class="btn btn-warning">Zastosuj</button>
+        <button type="button" id="download-btn" class="btn btn-success">📥 Pobierz plakat</button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">Wyczyść</button>
       </div>
     </form>
 
