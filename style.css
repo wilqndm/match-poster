@@ -8,7 +8,8 @@ body {
 
 .container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: flex-start;
   gap: 40px;
   padding: 40px;
   justify-content: center;
@@ -22,6 +23,7 @@ body {
   background: #222;
   border-radius: 10px;
   font-size: 13px;
+  box-sizing: border-box;
 }
 
 .compact-menu h2 {
@@ -64,7 +66,8 @@ form button {
 
 .poster {
   width: 1200px;
-  height: 630px;
+  min-width: 500px;
+  max-width: 100%;
   background: url('assets/bg_liga.png') no-repeat center/cover;
   position: relative;
   box-sizing: border-box;
