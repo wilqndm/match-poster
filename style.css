@@ -33,7 +33,7 @@ form label {
   font-size: 14px;
 }
 
-form input {
+form input, form select {
   padding: 8px;
   margin-top: 4px;
   border-radius: 4px;
@@ -66,17 +66,16 @@ form button {
 .poster {
   width: 1200px;
   height: 630px;
-  background: url('assets/bg_liga.png') no-repeat center/cover;
+  background: url('assets/bg_liga.png') no-repeat center center;
+  background-size: cover;
   position: relative;
   box-sizing: border-box;
   padding: 40px;
   overflow: hidden;
 }
 
-/* Pasek pod tekstem kolejki, NIE przykrywa logo, zaczyna się od lewej krawędzi grafiki */
 .matchday-bar-container {
   position: absolute;
-  /* logo ma 80px wysokości + 20px odstępu = 100px, pasek ~10px niżej */
   top: 60px;
   left: 0;
   width: 100%;
@@ -84,7 +83,6 @@ form button {
   pointer-events: none;
 }
 
-/* Wersja SVG paska z ukośnym zakończeniem */
 .matchday-bar {
   position: absolute;
   left: 0;
