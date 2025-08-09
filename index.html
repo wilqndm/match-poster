@@ -8,10 +8,20 @@
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
+  <div class="poster" id="poster">
+  <img id="corner-logo" src="assets/logo_liga.png" alt="Logo typu" style="position:absolute;top:20px;left:20px;width:80px;height:auto;z-index:2;" />
+  </div>
   <div class="container">
     <form id="match-form">
       <h2>Ustawienia meczu</h2>
-      <label>Kolejka: <input type="text" id="matchday-input" placeholder="np. 1. kolejka &quot;B&quot; Klasa" /></label>
+      <label>
+  Rodzaj meczu:
+  <select id="match-type">
+    <option value="liga">Liga</option>
+    <option value="puchar">Puchar</option>
+  </select>
+</label>
+      <label>Kolejka: <input type="text" id="matchday-input" placeholder="np. 1. kolejka" /></label>
       <label>Gospodarz: <input type="text" id="teamA-input" placeholder="Nazwa gospodarza" /></label>
       <label>Logo Gospodarz: <input type="file" id="logoA-input" accept="image/*" /></label>
       <label>Goście: <input type="text" id="teamB-input" placeholder="Nazwa gości" /></label>
