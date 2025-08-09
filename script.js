@@ -1,75 +1,85 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("match-form");
-  const posterWrapper = document.querySelector(".poster-wrapper");
   const poster = document.getElementById("poster");
+
+  const matchday = document.getElementById("matchday");
+  const teamA = document.getElementById("teamA");
+  const teamB = document.getElementById("teamB");
+  const logoA = document.getElementById("logoA");
+  const logoB = document.getElementById("logoB");
+  const dateEl = document.getElementById("date");
+  const timeEl = document.getElementById("time");
+  const locationEl = document.getElementById("location");
+  const cornerLogo = document.getElementById("corner-logo");
+
+  const matchTypeSelect = document.getElementById("match-type");
   const downloadBtn = document.getElementById("download-btn");
   const resetBtn = document.getElementById("reset-btn");
 
-  let bgImage = new Image();
+  // Zmiana tła wg typu meczu
+  matchTypeSelect.addEventListener("change", () => {
+    updateBackground();
+  });
 
-  // Wczytaj tło i ustaw rozmiar plakatu
-  bgImage.src = "assets/bg.jpg"; // ścieżka do pliku tła
-  bgImage.onload = () => {
-    poster.style.width = bgImage.naturalWidth + "px";
-    poster.style.height = bgImage.naturalHeight + "px";
-    poster.style.backgroundImage = `url(${bgImage.src})`;
-  };
+  function updateBackground() {
+    const type = matchTypeSelect.value;
+    poster.style.backgroundImage = `url(assets/bg_${type}.png)`;
+    cornerLogo.src = `assets/logo_${type}.png`;
+  }
+  updateBackground();
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    document.getElementById("matchday").textContent =
-      document.getElementById("matchday-input").value;
+    matchday.textContent = document.getElementById("matchday-input").value;
+    teamA.textContent = document.getElementById("teamA-input").value;
+    teamB.textContent = document.getElementById("teamB-input").value;
+    dateEl.textContent = document.getElementById("date-input").value;
+    timeEl.textContent = document.getElementById("time-input").value;
+    locationEl.textContent = document.getElementById("location-input").value;
 
-    document.getElementById("teamA").textContent =
-      document.getElementById("teamA-input").value;
-
-    document.getElementById("teamB").textContent =
-      document.getElementById("teamB-input").value;
-
-    document.getElementById("date").textContent =
-      document.getElementById("date-input").value;
-
-    document.getElementById("time").textContent =
-      document.getElementById("time-input").value;
-
-    document.getElementById("location").textContent =
-      document.getElementById("location-input").value;
-
-    const logoAInput = document.getElementById("logoA-input");
-    if (logoAInput.files[0]) {
+    const fileA = document.getElementById("logoA-input").files[0];
+    if (fileA) {
       const reader = new FileReader();
-      reader.onload = (e) =>
-        (document.getElementById("logoA").src = e.target.result);
-      reader.readAsDataURL(logoAInput.files[0]);
+      reader.onload = () => (logoA.src = reader.result);
+      reader.readAsDataURL(fileA);
     }
 
-    const logoBInput = document.getElementById("logoB-input");
-    if (logoBInput.files[0]) {
+    const fileB = document.getElementById("logoB-input").files[0];
+    if (fileB) {
       const reader = new FileReader();
-      reader.onload = (e) =>
-        (document.getElementById("logoB").src = e.target.result);
-      reader.readAsDataURL(logoBInput.files[0]);
+      reader.onload = () => (logoB.src = reader.result);
+      reader.readAsDataURL(fileB);
     }
   });
 
   downloadBtn.addEventListener("click", () => {
-    posterWrapper.style.transform = "scale(1)";
+    const scaleBackup = document.querySelector(".poster-wrapper").style.transform;
+    document.querySelector(".poster-wrapper").style.transform = "scale(1)";
 
     html2canvas(poster, {
-      backgroundColor: null,
       scale: 1,
-      useCORS: true
+      width: poster.offsetWidth,
+      height: poster.offsetHeight
     }).then((canvas) => {
       const link = document.createElement("a");
       link.download = "plakat.png";
       link.href = canvas.toDataURL("image/png");
       link.click();
-      posterWrapper.style.transform = "scale(0.5)";
+      document.querySelector(".poster-wrapper").style.transform = scaleBackup;
     });
   });
 
   resetBtn.addEventListener("click", () => {
     form.reset();
+    matchday.textContent = '1. kolejka "B" Klasa';
+    teamA.textContent = "Drużyna A";
+    teamB.textContent = "Drużyna B";
+    logoA.src = "";
+    logoB.src = "";
+    dateEl.textContent = "2025-08-12";
+    timeEl.textContent = "18:00";
+    locationEl.textContent = "Stadion Narodowy";
+    updateBackground();
   });
 });
