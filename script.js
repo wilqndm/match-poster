@@ -111,15 +111,18 @@ function formatPolishDate(dateStr) {
 const matchTypeSelect = document.getElementById('match-type');
 const poster = document.getElementById('poster');
 const cornerLogo = document.getElementById('corner-logo');
+const matchdayBar = document.getElementById('matchday-bar');
 
 function updateMatchType() {
   const type = matchTypeSelect.value;
   if (type === 'liga') {
     poster.style.backgroundImage = "url('assets/bg_liga.png')";
     cornerLogo.src = 'assets/logo_liga.png';
+    matchdayBar.style.background = '#d60000'; // czerwony
   } else if (type === 'puchar') {
     poster.style.backgroundImage = "url('assets/bg_puchar.png')";
     cornerLogo.src = 'assets/logo_puchar.jpg';
+    matchdayBar.style.background = '#00a650'; // zielony
   }
 }
 
