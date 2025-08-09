@@ -1,85 +1,79 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("match-form");
-  const poster = document.getElementById("poster");
+const poster = document.getElementById('poster');
+const cornerLogo = document.getElementById('corner-logo');
+const matchdayBarShape = document.getElementById('matchday-bar-shape');
 
-  const matchday = document.getElementById("matchday");
-  const teamA = document.getElementById("teamA");
-  const teamB = document.getElementById("teamB");
-  const logoA = document.getElementById("logoA");
-  const logoB = document.getElementById("logoB");
-  const dateEl = document.getElementById("date");
-  const timeEl = document.getElementById("time");
-  const locationEl = document.getElementById("location");
-  const cornerLogo = document.getElementById("corner-logo");
+const matchTypeSelect = document.getElementById('match-type');
+const matchdayInput = document.getElementById('matchday-input');
+const teamAInput = document.getElementById('teamA-input');
+const teamBInput = document.getElementById('teamB-input');
+const dateInput = document.getElementById('date-input');
+const timeInput = document.getElementById('time-input');
+const locationInput = document.getElementById('location-input');
+const logoAInput = document.getElementById('logoA-input');
+const logoBInput = document.getElementById('logoB-input');
 
-  const matchTypeSelect = document.getElementById("match-type");
-  const downloadBtn = document.getElementById("download-btn");
-  const resetBtn = document.getElementById("reset-btn");
+const matchday = document.getElementById('matchday');
+const teamA = document.getElementById('teamA');
+const teamB = document.getElementById('teamB');
+const date = document.getElementById('date');
+const time = document.getElementById('time');
+const locationEl = document.getElementById('location');
+const logoA = document.getElementById('logoA');
+const logoB = document.getElementById('logoB');
 
-  // Zmiana tła wg typu meczu
-  matchTypeSelect.addEventListener("change", () => {
-    updateBackground();
-  });
-
-  function updateBackground() {
-    const type = matchTypeSelect.value;
-    poster.style.backgroundImage = `url(assets/bg_${type}.png)`;
-    cornerLogo.src = `assets/logo_${type}.png`;
+function updateMatchType() {
+  const type = matchTypeSelect.value;
+  if (type === 'liga') {
+    poster.style.backgroundImage = "url('assets/bg_liga.png')";
+    cornerLogo.src = 'assets/logo_liga.png';
+    matchdayBarShape.style.fill = '#e4022e';
+  } else if (type === 'puchar') {
+    poster.style.backgroundImage = "url('assets/bg_puchar.png')";
+    cornerLogo.src = 'assets/logo_puchar-2.png';
+    matchdayBarShape.style.fill = '#8cbe39';
   }
-  updateBackground();
+}
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+matchTypeSelect.addEventListener('change', updateMatchType);
 
-    matchday.textContent = document.getElementById("matchday-input").value;
-    teamA.textContent = document.getElementById("teamA-input").value;
-    teamB.textContent = document.getElementById("teamB-input").value;
-    dateEl.textContent = document.getElementById("date-input").value;
-    timeEl.textContent = document.getElementById("time-input").value;
-    locationEl.textContent = document.getElementById("location-input").value;
+document.getElementById('match-form').addEventListener('submit', e => {
+  e.preventDefault();
+  matchday.textContent = matchdayInput.value;
+  teamA.textContent = teamAInput.value;
+  teamB.textContent = teamBInput.value;
+  date.textContent = dateInput.value;
+  time.textContent = timeInput.value;
+  locationEl.textContent = locationInput.value;
+});
 
-    const fileA = document.getElementById("logoA-input").files[0];
-    if (fileA) {
-      const reader = new FileReader();
-      reader.onload = () => (logoA.src = reader.result);
-      reader.readAsDataURL(fileA);
-    }
+logoAInput.addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (file) logoA.src = URL.createObjectURL(file);
+});
 
-    const fileB = document.getElementById("logoB-input").files[0];
-    if (fileB) {
-      const reader = new FileReader();
-      reader.onload = () => (logoB.src = reader.result);
-      reader.readAsDataURL(fileB);
-    }
-  });
+logoBInput.addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (file) logoB.src = URL.createObjectURL(file);
+});
 
-  downloadBtn.addEventListener("click", () => {
-    const scaleBackup = document.querySelector(".poster-wrapper").style.transform;
-    document.querySelector(".poster-wrapper").style.transform = "scale(1)";
-
-    html2canvas(poster, {
-      scale: 1,
-      width: poster.offsetWidth,
-      height: poster.offsetHeight
-    }).then((canvas) => {
-      const link = document.createElement("a");
-      link.download = "plakat.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-      document.querySelector(".poster-wrapper").style.transform = scaleBackup;
-    });
-  });
-
-  resetBtn.addEventListener("click", () => {
-    form.reset();
-    matchday.textContent = '1. kolejka "B" Klasa';
-    teamA.textContent = "Drużyna A";
-    teamB.textContent = "Drużyna B";
-    logoA.src = "";
-    logoB.src = "";
-    dateEl.textContent = "2025-08-12";
-    timeEl.textContent = "18:00";
-    locationEl.textContent = "Stadion Narodowy";
-    updateBackground();
+document.getElementById('download-btn').addEventListener('click', () => {
+  poster.style.transform = 'scale(1)'; // pełna skala do zapisu
+  html2canvas(poster, {
+    backgroundColor: null,
+    useCORS: true,
+    scale: 1
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'plakat.png';
+    link.href = canvas.toDataURL();
+    link.click();
+    poster.style.transform = 'scale(0.5)'; // powrót do podglądu
   });
 });
+
+document.getElementById('reset-btn').addEventListener('click', () => {
+  document.getElementById('match-form').reset();
+  updateMatchType();
+});
+
+updateMatchType();
