@@ -132,8 +132,7 @@ form button {
   position: absolute;
   bottom: 125px;
   left: 10px;
-  width: 1180px;
-  height: auto;
+  right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -144,6 +143,7 @@ form button {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 /* Pasek informacji */
@@ -151,13 +151,13 @@ form button {
   position: absolute;
   bottom: 40px;
   left: 10px;
-  width: 1180px;
-  height: auto;
+  right: 10px;
   display: flex;
   justify-content: space-around;
   background: rgba(0, 0, 0, 0.7);
   padding: 20px;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 
 .vs {
