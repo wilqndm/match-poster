@@ -64,6 +64,7 @@ form button {
   background: #00cc66;
 }
 
+/* Podgląd plakatu */
 .poster {
   width: 1200px;
   height: 630px;
@@ -74,6 +75,8 @@ form button {
   box-sizing: border-box;
   padding: 0;
   overflow: hidden;
+  transform: scale(0.5);          /* podgląd w 50% */
+  transform-origin: top left;
 }
 
 /* Pasek pod tekstem kolejki */
