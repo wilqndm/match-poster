@@ -64,19 +64,19 @@ form button {
   background: #00cc66;
 }
 
-/* Podgląd plakatu */
+.poster-wrapper {
+  transform: scale(0.5);
+  transform-origin: top left;
+}
+
 .poster {
-  width: 1200px;
-  height: 630px;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 1200px 630px;
+  background-size: cover;
   position: relative;
   box-sizing: border-box;
   padding: 0;
   overflow: hidden;
-  transform: scale(0.5);          /* podgląd w 50% */
-  transform-origin: top left;
 }
 
 /* Pasek pod tekstem kolejki */
@@ -84,7 +84,7 @@ form button {
   position: absolute;
   top: 60px;
   left: 0;
-  width: 1200px;
+  width: 100%;
   height: 85px;
   z-index: 2;
   pointer-events: none;
@@ -94,7 +94,7 @@ form button {
   position: absolute;
   left: 0;
   top: 0;
-  width: 1080px;
+  width: 100%;
   height: 85px;
   z-index: 1;
   pointer-events: none;
@@ -114,13 +114,14 @@ form button {
 .logos {
   position: absolute;
   top: 170px;
-  left: 250px;
-  width: 700px;
-  height: auto;
+  left: 0;
+  width: 100%;
+  padding: 0 250px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 1;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -149,6 +150,19 @@ form button {
   box-sizing: border-box;
 }
 
+.vs {
+  color: #ffcc00;
+  min-width: 60px;
+}
+
+.team {
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Pasek informacji */
 .info-bar {
   position: absolute;
@@ -161,19 +175,6 @@ form button {
   padding: 20px;
   border-radius: 10px;
   box-sizing: border-box;
-}
-
-.vs {
-  color: #ffcc00;
-  min-width: 60px;
-}
-
-.team {
-  flex: 1;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .info {
