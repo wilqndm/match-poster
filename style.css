@@ -68,7 +68,7 @@ form button {
 .matchday-bar-container {
   position: absolute;
   top: 110px; /* logo ma 80px wysokości + 20px odstępu = 100px, pasek 10px niżej */
-  left: 0;
+  left: 150px;
   width: 100%;
   z-index: 2;
   pointer-events: none;
@@ -174,5 +174,5 @@ form button {
   left: 20px;
   width: 80px;
   height: auto;
-  z-index: 2;
+  z-index: 3;
 }
