@@ -78,6 +78,7 @@ flex-direction: column;
 align-items: flex-start;
 }
 
+
 /* Pasek pod tekstem, wystaje 10px nad tekst, sciety 45 stopni */
 .matchday-bar {
   position: absolute;
