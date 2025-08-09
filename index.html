@@ -11,51 +11,51 @@
 </head>
 <body>
   <div class="container">
-    <form id="match-form" class="needs-validation" novalidate>
-      <h2 class="mb-3">Ustawienia meczu</h2>
-      <div class="mb-3">
-        <label for="match-type" class="form-label">Rodzaj meczu:</label>
-        <select id="match-type" class="form-select">
+    <form id="match-form" class="needs-validation compact-menu" novalidate>
+      <h2 class="mb-2 fs-5">Ustawienia meczu</h2>
+      <div class="mb-2">
+        <label for="match-type" class="form-label small-label">Rodzaj meczu:</label>
+        <select id="match-type" class="form-select form-select-sm small-input">
           <option value="liga">Liga</option>
           <option value="puchar">Puchar</option>
         </select>
       </div>
-      <div class="mb-3">
-        <label for="matchday-input" class="form-label">Kolejka:</label>
-        <input type="text" id="matchday-input" class="form-control" placeholder="np. 1. kolejka &quot;B&quot; Klasa" />
+      <div class="mb-2">
+        <label for="matchday-input" class="form-label small-label">Kolejka:</label>
+        <input type="text" id="matchday-input" class="form-control form-control-sm small-input" placeholder="np. 1. kolejka &quot;B&quot; Klasa" />
       </div>
-      <div class="mb-3">
-        <label for="teamA-input" class="form-label">Gospodarz:</label>
-        <input type="text" id="teamA-input" class="form-control" placeholder="Nazwa gospodarza" />
+      <div class="mb-2">
+        <label for="teamA-input" class="form-label small-label">Gospodarz:</label>
+        <input type="text" id="teamA-input" class="form-control form-control-sm small-input" placeholder="Nazwa gospodarza" />
       </div>
-      <div class="mb-3">
-        <label for="logoA-input" class="form-label">Logo Gospodarz:</label>
-        <input type="file" id="logoA-input" class="form-control" accept="image/*" />
+      <div class="mb-2">
+        <label for="logoA-input" class="form-label small-label">Logo Gospodarz:</label>
+        <input type="file" id="logoA-input" class="form-control form-control-sm small-input" accept="image/*" />
       </div>
-      <div class="mb-3">
-        <label for="teamB-input" class="form-label">Goście:</label>
-        <input type="text" id="teamB-input" class="form-control" placeholder="Nazwa gości" />
+      <div class="mb-2">
+        <label for="teamB-input" class="form-label small-label">Goście:</label>
+        <input type="text" id="teamB-input" class="form-control form-control-sm small-input" placeholder="Nazwa gości" />
       </div>
-      <div class="mb-3">
-        <label for="logoB-input" class="form-label">Logo Goście:</label>
-        <input type="file" id="logoB-input" class="form-control" accept="image/*" />
+      <div class="mb-2">
+        <label for="logoB-input" class="form-label small-label">Logo Goście:</label>
+        <input type="file" id="logoB-input" class="form-control form-control-sm small-input" accept="image/*" />
       </div>
-      <div class="mb-3">
-        <label for="match-date" class="form-label">Data meczu</label>
-        <input type="date" id="match-date" name="match-date" class="form-control"/>
+      <div class="mb-2">
+        <label for="match-date" class="form-label small-label">Data meczu</label>
+        <input type="date" id="match-date" name="match-date" class="form-control form-control-sm small-input"/>
       </div>
-      <div class="mb-3">
-        <label for="match-time" class="form-label">Godzina meczu</label>
-        <input type="time" id="match-time" name="match-time" class="form-control"/>
+      <div class="mb-2">
+        <label for="match-time" class="form-label small-label">Godzina meczu</label>
+        <input type="time" id="match-time" name="match-time" class="form-control form-control-sm small-input"/>
       </div>
-      <div class="mb-3">
-        <label for="location-input" class="form-label">Miejsce:</label>
-        <input type="text" id="location-input" class="form-control" placeholder="np. Stadion Narodowy" />
+      <div class="mb-2">
+        <label for="location-input" class="form-label small-label">Miejsce:</label>
+        <input type="text" id="location-input" class="form-control form-control-sm small-input" placeholder="np. Stadion Narodowy" />
       </div>
-      <div class="mt-3 d-flex gap-2">
-        <button type="submit" class="btn btn-warning">Zastosuj</button>
-        <button type="button" id="download-btn" class="btn btn-success">📥 Pobierz plakat</button>
-        <button type="button" id="reset-btn" class="btn btn-secondary">Wyczyść</button>
+      <div class="mt-2 d-flex gap-2">
+        <button type="submit" class="btn btn-warning btn-sm">Zastosuj</button>
+        <button type="button" id="download-btn" class="btn btn-success btn-sm">📥 Pobierz plakat</button>
+        <button type="button" id="reset-btn" class="btn btn-secondary btn-sm">Wyczyść</button>
       </div>
     </form>
 
