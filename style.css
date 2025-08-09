@@ -1,247 +1,192 @@
-/* --- RESET & GLOBAL --- */
-* {
-  box-sizing: border-box;
-}
-
 body {
-  margin: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #111;
-  color: white;
-  padding: 20px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+margin: 0;
+font-family: sans-serif;
+background: #111;
+color: white;
 }
 
 .container {
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-  align-items: flex-start;
+display: flex;
+flex-wrap: wrap;
+gap: 40px;
+padding: 40px;
+justify-content: center;
 }
 
-/* --- FORMULARZ --- */
 form {
-  background: #222;
-  padding: 20px 25px;
-  border-radius: 12px;
-  width: 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+display: flex;
+flex-direction: column;
+gap: 10px;
+width: 300px;
+background: #222;
+padding: 20px;
+border-radius: 10px;
 }
 
 form h2 {
-  margin: 0 0 20px 0;
-  font-weight: 700;
-  font-size: 22px;
-  color: #ffcc00;
+margin-top: 0;
 }
 
-label {
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-  color: #ddd;
+form label {
+display: flex;
+flex-direction: column;
+font-size: 14px;
 }
 
-input[type="text"],
-input[type="date"],
-input[type="time"],
-select {
-  margin-top: 6px;
-  padding: 9px 12px;
-  border-radius: 6px;
-  border: 1px solid #555;
-  background: #111;
-  color: white;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="time"]:focus,
-select:focus {
-  outline: none;
-  border-color: #ffcc00;
+form input {
+  padding: 6px;
+  padding: 8px;
+margin-top: 4px;
+border-radius: 4px;
+border: none;
   background: #222;
   color: #fff;
-  box-shadow: 0 0 8px #ffcc00aa;
-  transition: border-color 0.3s ease;
-  cursor: text;
-}
-
-input[type="file"] {
-  margin-top: 6px;
-  color: white;
-}
-
-.form-buttons {
-  margin-top: 15px;
-  display: flex;
-  gap: 15px;
-  justify-content: space-between;
-}
-
-button {
-  background-color: #ffcc00;
-  border: none;
-  color: #222;
-  font-weight: 700;
-  padding: 12px 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
   font-size: 16px;
-  flex: 1;
+  border: 1px solid #888;
 }
 
-button#download-btn {
-  background-color: #00cc66;
-  color: white;
+form input[type="date"], 
+form input[type="time"] {
+  cursor: pointer;
 }
 
-button:hover {
-  background-color: #e6b800;
+form button {
+margin-top: 10px;
+padding: 10px;
+background: #ffcc00;
+border: none;
+font-weight: bold;
+cursor: pointer;
+border-radius: 5px;
 }
 
-button#download-btn:hover {
-  background-color: #00b359;
+#download-btn {
+background: #00cc66;
 }
 
-/* --- PLAKAT --- */
 .poster {
-  position: relative;
-  width: 1080px;  /* stała szerokość tła */
-  height: 630px;  /* stała wysokość tła */
-  background-size: cover;
-  background-position: center;
-  border-radius: 15px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.9);
-  transform: scale(0.5); /* podgląd 50% */
-  transform-origin: top left;
-  user-select: none;
-  overflow: hidden;
+width: 1200px;
+height: 630px;
+background: url('assets/bg_liga.png') no-repeat center/cover;
+position: relative;
+box-sizing: border-box;
+padding: 40px;
+overflow: hidden;
 }
 
-/* --- GÓRNY PASEK KOLEJKI --- */
+/* Pasek pod tekstem kolejki, NIE przykrywa logo, zaczyna się od lewej krawędzi grafiki */
 .matchday-bar-container {
-  position: absolute;
-  top: 20px;
-  left: 0;
-  width: 90%;  /* max 90% szerokości plakatu */
-  height: 85px;
-  pointer-events: none;
-  z-index: 10;
+position: absolute;
+  top: 60px; /* logo ma 80px wysokości + 20px odstępu = 100px, pasek 10px niżej */
+  top: 60px;
+left: 0px;
+width: 100%;
+z-index: 2;
+pointer-events: none;
 }
 
 .matchday-bar {
-  width: 100%;
-  height: 100%;
-}
-
-#matchday-bar-shape {
-  transition: fill 0.3s ease;
+position: absolute;
+left: 0;
+top: 0;
+width: 90%;
+height: 85px;
+  background: #e4022e; /* kolor zmieniany w JS dla pucharu */
+  background: #e4022e;
+clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+z-index: 1;
+pointer-events: none;
 }
 
 .matchday {
-  position: absolute;
-  top: 25px;
-  left: 25px;
-  font-size: 36px;
-  font-weight: 900;
-  color: white;
-  user-select: text;
-  pointer-events: none;
-  z-index: 20;
-  text-shadow: 0 0 5px rgba(0,0,0,0.7);
+position: relative;
+font-size: 42px;
+font-weight: bold;
+color: #fff;
+margin-top: 17px;
+margin-left: 200px;
+margin-bottom: 10px;
+z-index: 2;
 }
 
-/* --- LOGA DRUŻYN --- */
 .logos {
-  position: absolute;
-  top: 150px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 180px;
-  pointer-events: none;
-  z-index: 10;
+position: absolute;
+top: 170px;
+left: 0;
+right: 0;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0 250px;
+z-index: 1;
 }
 
 .logo {
-  width: 220px;
-  height: 220px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
-  user-select: none;
+width: 200px;
+height: auto;
+object-fit: contain;
+filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
 }
 
-/* --- PASEK VS --- */
 .vs-bar {
-  position: absolute;
-  top: 400px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  font-size: 48px;
-  font-weight: 800;
-  color: #ffcc00;
-  text-shadow: 0 0 5px rgba(0,0,0,0.7);
-  user-select: none;
-  pointer-events: none;
+position: absolute;
+bottom: 125px;
+left: 10px;
+right: 10px;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 40px;
+font-size: 40px;
+font-weight: bold;
+background: rgba(0, 0, 0, 0.6);
+padding: 20px;
+border-radius: 10px;
+text-align: center;
+}
+
+.vs {
+color: #ffcc00;
+min-width: 60px;
 }
 
 .team {
-  max-width: 320px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+flex: 1;
+text-align: center;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 }
 
-/* --- PASEK INFO NA DOLE --- */
 .info-bar {
-  position: absolute;
-  bottom: 30px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 70px;
-  font-size: 22px;
-  font-weight: 600;
-  color: white;
-  user-select: none;
-  pointer-events: none;
-  text-shadow: 0 0 5px rgba(0,0,0,0.7);
+position: absolute;
+bottom: 40px;
+left: 10px;
+right: 10px;
+display: flex;
+justify-content: space-around;
+background: rgba(0, 0, 0, 0.7);
+padding: 20px;
+border-radius: 10px;
 }
 
 .info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+display: flex;
+align-items: center;
+gap: 10px;
+font-size: 18px;
 }
 
 .info img {
-  width: 28px;
-  height: 28px;
-  filter: drop-shadow(0 0 2px rgba(0,0,0,0.8));
+width: 24px;
+height: 24px;
 }
 
-/* --- LOGO W ROGU --- */
 #corner-logo {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 110px;
-  height: auto;
-  user-select: none;
-  pointer-events: none;
-  filter: drop-shadow(0 0 5px rgba(0,0,0,0.7));
-  z-index: 30;
+position: absolute;
+top: 20px;
+left: 20px;
+width: 100px;
+height: auto;
+z-index: 3;
 }
