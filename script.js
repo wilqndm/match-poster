@@ -126,15 +126,15 @@ function updateMatchType() {
     cornerLogo.src = 'assets/logo_puchar-2.png';
   }
 
-  // Jeden pasek: kolor przez zmienną CSS
+  // Jeden pasek: ustaw kolor bezpośrednio (najpewniej)
   const barColor = (type === 'liga') ? '#e4022e' : '#8cbe39'; // czerwony / zielony
-  matchdayBar.style.setProperty('--bar-color', barColor);
+  matchdayBar.style.backgroundColor = barColor;
 }
 
-// Zmień tło i logo po zmianie wyboru
+// Zmiana typu
 matchTypeSelect.addEventListener('change', updateMatchType);
 
-// Ustaw domyślny typ meczu oraz datę i godzinę po załadowaniu strony
+// Po starcie
 window.addEventListener('DOMContentLoaded', () => {
   updateMatchType();
 
@@ -149,7 +149,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Obsługa przycisku "Wyczyść" (wraca do wartości z makiety)
+// Reset do wartości makiety
 document.getElementById('reset-btn').addEventListener('click', () => {
   document.getElementById('match-form').reset();
 
@@ -174,7 +174,7 @@ document.getElementById('reset-btn').addEventListener('click', () => {
   updateMatchType();
 });
 
-// Podgląd logo po wyborze pliku (bez usuwania tła)
+// Podgląd logo po wyborze pliku
 function handleLogoInput(inputId, imgId) {
   const input = document.getElementById(inputId);
   const img = document.getElementById(imgId);
@@ -197,6 +197,5 @@ function handleLogoInput(inputId, imgId) {
   });
 }
 
-// Obsługa logo gospodarza i gości (podgląd)
 handleLogoInput('logoA-input', 'logoA');
 handleLogoInput('logoB-input', 'logoB');
