@@ -6,6 +6,7 @@
   <title>Match Poster Generator</title>
   <link rel="stylesheet" href="style.css" />
   https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js
+  <script src="script.js" defer></script>
 </head>
 <body>
   <div class="container">
@@ -63,10 +64,8 @@
       <img id="corner-logo" src="assets/logo_liga.png" alt="Logo typu" />
 
       <div class="matchday-bar-container">
-        <!-- Pasek z ukośnym zakończeniem; kolor nadawany w JS przez atrybut fill -->
-        <svg class="matchday-bar" id="matchday-bar" viewBox="0 0 1200 85" preserveAspectRatio="none" aria-hidden="true">
-          <polygon points="0,0 1200,0 1080,85 0,85" fill="#e4022e"></polygon>
-        </svg>
+        <!-- PASEK: jeden element DIV, kolor nadawany zmienną CSS --bar-color -->
+        <div class="matchday-bar" id="matchday-bar" aria-hidden="true"></div>
 
         <div class="matchday" id="matchday">1. kolejka "B" Klasa</div>
       </div>
@@ -85,7 +84,7 @@
       <div class="info-bar" id="info-bar">
         <div class="info">
           <img src="assets/icons/calendar.svg" alt="Data" />
-          <span id="date">12 sierpnia 2025 (wtorek)</span>
+          <span id="date">2025-08-12</span>
         </div>
         <div class="info">
           <img src="assets/icons/clock.svg" alt="Godzina" />
@@ -98,7 +97,5 @@
       </div>
     </div>
   </div>
-
-  <script src="script.js" defer></script>
 </body>
 </html>
