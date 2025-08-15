@@ -36,9 +36,17 @@ Rodzaj meczu:
 <div class="poster" id="poster">
 <img id="corner-logo" src="assets/logo_liga.png" alt="Logo typu" />
 <div class="matchday-bar-container">
-   <svg class="matchday-bar" viewBox="0 0 1200 85" preserveAspectRatio="none">
-          <polygon points="0,0 1200,0 1080,85 0,85"" />
-        </svg>
+   
+<svg class="matchday-bar" id="matchday-bar" viewBox="0 0 1200 85" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="whiteBlueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="white" />
+      <stop offset="100%" stop-color="#002b5c" />
+    </linearGradient>
+  </defs>
+  <polygon points="0,0 1200,0 1080,85 0,85" fill="url(#whiteBlueGradient)" />
+</svg>
+
 <div class="matchday" id="matchday">1. kolejka "B" Klasa</div>
 </div>
 
