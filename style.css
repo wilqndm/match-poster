@@ -76,8 +76,7 @@ form button {
 /* Pasek pod tekstem kolejki, NIE przykrywa logo, zaczyna się od lewej krawędzi grafiki */
 .matchday-bar-container {
   position: absolute;
-  /* logo ma 80px wysokości + 20px odstępu = 100px, pasek ~10px niżej */
-  top: 60px;
+  top: 60px; /* logo ma 80px wysokości + 20px odstępu = 100px, pasek ~10px niżej */
   left: 0;
   width: 100%;
   z-index: 2;
@@ -85,16 +84,15 @@ form button {
 }
 
 .matchday-bar {
-  position: absolute;
-  left: 0;
-  top: 0;
+  position: relative;
   width: 90%;
   height: 85px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="85"><polygon points="0,0 100,0 90,85 0,85" fill="%23002b5c"/></svg>') no-repeat;
+  background-size: cover;
   z-index: 1;
   pointer-events: none;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="85"><polygon points="0,0 100%,0 90%,85 0,85" fill="%23ff0000"/></svg>') no-repeat;
-  background-size: cover;
 }
+
 
 
 .matchday {
