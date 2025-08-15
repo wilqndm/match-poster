@@ -9,44 +9,33 @@ document.getElementById('match-form').addEventListener('submit', function (e) {
 
   document.getElementById('matchday').textContent = matchdayValue || '1. kolejka "B" Klasa';
 
-  document.getElementById('teamA').textContent = teamAValue || 'Drużyna A';
-  document.getElementById('teamA').setAttribute('title', document.getElementById('teamA').textContent);
-
-  document.getElementById('teamB').textContent = teamBValue || 'Drużyna B';
-  document.getElementById('teamB').setAttribute('title', document.getElementById('teamB').textContent);
+  const teamAEl = document.getElementById('teamA');
+  const teamBEl = document.getElementById('teamB');
+  teamAEl.textContent = teamAValue || 'Drużyna A';
+  teamAEl.setAttribute('title', teamAEl.textContent);
+  teamBEl.textContent = teamBValue || 'Drużyna B';
+  teamBEl.setAttribute('title', teamBEl.textContent);
 
   const dateValue = document.getElementById('date-input').value;
-  document.getElementById('date').textContent = formatPolishDate(dateValue);
+  document.getElementById('date').textContent = formatPolishDate(dateValue) || '2025-08-12';
 
   document.getElementById('time').textContent = document.getElementById('time-input').value || '18:00';
   document.getElementById('location').textContent = document.getElementById('location-input').value || 'Stadion Narodowy';
 
-  // Logo A – usuwanie tła przez backend /api/remove-bg (jeśli działa),
-  // w razie błędu, pozostanie podgląd z "handleLogoInput".
+  // Logo A – usuwanie tła przez backend /api/remove-bg (jeśli dostępny)
   const logoAFile = document.getElementById('logoA-input').files[0];
   if (logoAFile) {
     removeBackground(logoAFile)
-      .then(url => {
-        document.getElementById('logoA').src = url;
-      })
-      .catch(err => {
-        console.error('Błąd usuwania tła z logo A:', err);
-        // alert opcjonalny, ale nie psujemy podglądu:
-        // alert('Nie udało się usunąć tła z logo A.');
-      });
+      .then(url => { document.getElementById('logoA').src = url; })
+      .catch(err => { console.error('Błąd usuwania tła z logo A:', err); });
   }
 
   // Logo B – usuwanie tła
   const logoBFile = document.getElementById('logoB-input').files[0];
   if (logoBFile) {
     removeBackground(logoBFile)
-      .then(url => {
-        document.getElementById('logoB').src = url;
-      })
-      .catch(err => {
-        console.error('Błąd usuwania tła z logo B:', err);
-        // alert('Nie udało się usunąć tła z logo B.');
-      });
+      .then(url => { document.getElementById('logoB').src = url; })
+      .catch(err => { console.error('Błąd usuwania tła z logo B:', err); });
   }
 });
 
@@ -100,7 +89,7 @@ async function removeBackground(file) {
   });
 }
 
-// Formatowanie daty na polski zapis z dniem tygodnia (odporne na puste i strefy)
+// Formatowanie daty na polski zapis z dniem tygodnia
 function formatPolishDate(dateStr) {
   if (!dateStr) return '';
   const dni = ['niedziela', 'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota'];
@@ -109,7 +98,6 @@ function formatPolishDate(dateStr) {
     'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'
   ];
 
-  // wymuś północ lokalną by uniknąć przesunięć
   const date = new Date(`${dateStr}T00:00:00`);
   if (Number.isNaN(date.getTime())) return dateStr;
 
@@ -133,15 +121,14 @@ function updateMatchType() {
   if (type === 'liga') {
     poster.style.backgroundImage = "url('assets/bg_liga.png')";
     cornerLogo.src = 'assets/logo_liga.png';
-  } else if (type === 'puchar') {
+  } else {
     poster.style.backgroundImage = "url('assets/bg_puchar.png')";
     cornerLogo.src = 'assets/logo_puchar-2.png';
   }
 
-  // Zmiana koloru paska (SVG polygon fill):
-  const polygon = matchdayBar?.querySelector('polygon');
+  // Jeden pasek: kolor przez zmienną CSS
   const barColor = (type === 'liga') ? '#e4022e' : '#8cbe39'; // czerwony / zielony
-  if (polygon) polygon.setAttribute('fill', barColor);
+  matchdayBar.style.setProperty('--bar-color', barColor);
 }
 
 // Zmień tło i logo po zmianie wyboru
@@ -153,25 +140,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const dateInput = document.getElementById('date-input');
   const timeInput = document.getElementById('time-input');
-
   if (dateInput) {
     const today = new Date();
     dateInput.valueAsDate = today;
-    // Od razu pokaż sformatowaną datę w podglądzie
-    document.getElementById('date').textContent = formatPolishDate(today.toISOString().slice(0, 10));
   }
-
   if (timeInput) {
     timeInput.value = "18:00";
   }
 });
 
-// Obsługa przycisku "Wyczyść"
+// Obsługa przycisku "Wyczyść" (wraca do wartości z makiety)
 document.getElementById('reset-btn').addEventListener('click', () => {
-  const form = document.getElementById('match-form');
-  form.reset();
+  document.getElementById('match-form').reset();
 
-  // Reset podglądu do rozsądnych wartości
   document.getElementById('matchday').textContent = '1. kolejka "B" Klasa';
   document.getElementById('teamA').textContent = 'Drużyna A';
   document.getElementById('teamA').setAttribute('title', 'Drużyna A');
@@ -179,17 +160,14 @@ document.getElementById('reset-btn').addEventListener('click', () => {
   document.getElementById('teamB').setAttribute('title', 'Drużyna B');
   document.getElementById('logoA').src = '';
   document.getElementById('logoB').src = '';
-
-  const today = new Date();
-  const todayISO = today.toISOString().slice(0, 10);
-  document.getElementById('date').textContent = formatPolishDate(todayISO);
+  document.getElementById('date').textContent = '2025-08-12';
   document.getElementById('time').textContent = '18:00';
   document.getElementById('location').textContent = 'Stadion Narodowy';
 
-  // Ustaw również pola formularza na domyślne
+  // Pola formularza
   const dateInput = document.getElementById('date-input');
   const timeInput = document.getElementById('time-input');
-  if (dateInput) dateInput.valueAsDate = today;
+  if (dateInput) dateInput.valueAsDate = new Date();
   if (timeInput) timeInput.value = '18:00';
 
   matchTypeSelect.value = 'liga';
@@ -214,9 +192,7 @@ function handleLogoInput(inputId, imgId) {
       return;
     }
     const reader = new FileReader();
-    reader.onload = function (e) {
-      img.src = e.target.result;
-    };
+    reader.onload = function (e) { img.src = e.target.result; };
     reader.readAsDataURL(file);
   });
 }
