@@ -75,24 +75,25 @@ form button {
   overflow: hidden;
 }
 
-/* Pasek pod tekstem kolejki, NIE przykrywa logo, zaczyna się od lewej krawędzi grafiki */
+/* Pasek pod tekstem kolejki; tylko JEDEN element */
 .matchday-bar-container {
   position: absolute;
-  /* logo ma 100px wysokości ~ tu pasek nie koliduje */
-  top: 60px;
+  top: 60px; /* nie koliduje z logo w rogu */
   left: 0;
   width: 100%;
   z-index: 2;
   pointer-events: none;
 }
 
-/* Wersja SVG paska z ukośnym zakończeniem */
+/* Pasek z ukośnym zakończeniem bez SVG — clip-path */
 .matchday-bar {
   position: absolute;
   left: 0;
   top: 0;
   width: 90%;
   height: 85px;
+  background: var(--bar-color, #e4022e); /* czerwony jako domyślny */
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
   z-index: 1;
   pointer-events: none;
 }
